@@ -10,8 +10,8 @@
 
 :root {
   /* Global style variables */
-  --body-text-color: #000000;
-  --central-body-bg-color: #FFF3E0;
+  --body-text-color: #FFF3E0;
+  --central-body-bg-color: #0B2B26;
   --body-bg-color: #0B2B26;
   --tab-hover-color: #317B22;
   --error-text-color: #EE6123;
@@ -256,6 +256,11 @@ button {
   text-transform: uppercase;
   transition: background-color 0.7s ease;
   width: 100%;
+}
+
+#submit-button.selected-yes {
+  background-color: #27ae60; /* Green for Yes */
+  color: white;
 }
 
 

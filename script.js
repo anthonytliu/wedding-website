@@ -72,7 +72,7 @@ function handleAgreeClick(value) {
         signatureBox.style.display = "block"; // Show signature box
         signatureBox.classList.add('show'); // Add class for fade effect
         submitBtn.style.display = "block"; // Show submit button
-        // submitBtn.classList.add('show'); // Add class for fade effect
+        // submitBtn.classList.add('selected-yes'); // Add class for fade effect
         engage = true;
         engageMessage.style.display = "none";
         if (!signaturePad) {
