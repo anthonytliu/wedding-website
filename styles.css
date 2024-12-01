@@ -224,8 +224,8 @@ label {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center
+  align-items: start;
+  text-align: start
 }
 
 canvas {
@@ -268,8 +268,8 @@ button {
 
 
 #submit-btn:hover {
-  color: var(--central-body-bg-color);
-  background-color: var(--tab-hover-color);
+  color: var(--body-text-color);
+  background-color: #27ae60;
   transition: background-color 0.7s ease;
 
 }
@@ -362,10 +362,12 @@ input::placeholder {
 
 /* List without bullets */
 .faq-list {
-  list-style-type: none; /* Remove bullets */
-  padding: 0; /* Remove padding */
   text-align: start; /* Center the list items */
   font-size: var(--text-font-size);
+}
+
+.faq-list ul {
+  padding-left: 15px;
 }
 
 .faq-list li {
@@ -428,6 +430,12 @@ img {
   height:auto;
   padding-top: 10dp;
 } 
+
+.submit-container {
+  display: flex;
+  flex: auto;
+  margin-top: 50px;
+}
 
 /* Spinner animation */
 @keyframes spin {

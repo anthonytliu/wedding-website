@@ -49,12 +49,11 @@ function handleUnderstandClick(value) {
     } else {
         followUp.style.display = "none"; // Hide follow-up
         document.getElementById("signature-box").style.display = "none";
-        document.getElementById("submit-btn").style.display = "none";
         document.getElementById("engage-positive-button").classList.remove('selected-yes', 'selected-no');
         document.getElementById("engage-negative-button").classList.remove('selected-yes', 'selected-no');
         engageMessage.style.display = "none";
         confirmationMessage.style.display = "block";
-        confirmationMessage.innerText = "Please contact Anthony or Mahal with questions.";
+        confirmationMessage.innerText = "Thank you for your honesty. Feel free to contact us with any questions.";
         if (signaturePad) {
             signaturePad.clear();
         }
@@ -103,7 +102,6 @@ function handleAgreeClick(value) {
         showNextElementAndScroll("signature-box"); // Smoothly scroll to signature box
     } else {
         signatureBox.style.display = "none"; // Hide signature box
-        submitBtn.style.display = "none"; // Hide submit button
         confirmationMessage.style.display = "none";
         engageMessage.style.display = "block";
         engageMessage.innerText = "Totally fine! We'd love to take you out to dinner on us sometime. Please click submit so we know not to send an invitation + questionnaire your way."
@@ -134,63 +132,85 @@ document.getElementById("saveTheDateForm").addEventListener("submit", function (
     const spinnerOverlay = document.getElementById('spinnerOverlay');
     spinnerOverlay.classList.add('show');
     document.getElementById("thank-you-message").style.display = "none";
+    const browserInfo = navigator.userAgent; // Get browser info
+    const deviceType = /Mobile|Android|iP(hone|od|ad)/i.test(navigator.userAgent) ? "Mobile" : "Desktop";
+    const dateTimeSubmitted = new Date().toLocaleString(); // Format as "MM/DD/YYYY, HH:MM:SS AM/PM"
+    const elapsedTime = Math.round((Date.now() - pageLoadStartTime) / 1000); // Time in seconds
     // Check if the signature pad is filled
-    if (signaturePad && !signaturePad.isEmpty()) {
-        const name = document.getElementById("name").value;
-        const signature = signaturePad.toDataURL("image/png"); // Capture signature as Base64
-        const browserInfo = navigator.userAgent; // Get browser info
+    if (!validateName) {
+        return;
+    } else if (document.getElementById("signature-box").style.display === 'block') {
+        if (signaturePad && !signaturePad.isEmpty()) {
+            const name = document.getElementById("name").value;
+            const signature = signaturePad.toDataURL("image/png"); // Capture signature as Base64
 
-        // Determine device type based on user agent
-        const deviceType = /Mobile|Android|iP(hone|od|ad)/i.test(navigator.userAgent) ? "Mobile" : "Desktop";
+            // Ensure all required fields are filled
+            if (!understand || !engage) {
+                alert("Please complete all fields.");
+                return;
+            }
 
-        // Capture current date and time
-        const dateTimeSubmitted = new Date().toLocaleString(); // Format as "MM/DD/YYYY, HH:MM:SS AM/PM"
+            // EmailJS template parameters with additional fields
+            const templateParams = {
+                from_name: name,
+                invitation_status: `ACCEPTED`,
+                browser_info: browserInfo,
+                device_type: deviceType, // Device type (Mobile or Desktop)
+                date_time_submitted: dateTimeSubmitted, // Date and time of submission
+                time_elapsed: `${elapsedTime} seconds`, // Time taken to complete the page
+                signature_image: "cid:signature_image" // Use cid for inline attachment
+            };
 
-        const elapsedTime = Math.round((Date.now() - pageLoadStartTime) / 1000); // Time in seconds
+            // Prepare attachment (signature image as a Base64 string)
+            const attachments = [
+                {
+                    filename: "signature.png",
+                    content: signature, // Remove the Base64 prefix
+                    cid: "signature_image" // Use the same CID as in the template
+                }
+            ];
 
-        // Ensure all required fields are filled
-        if (!understand || !engage) {
-            alert("Please complete all fields.");
-            return;
+            // Send email with EmailJS, including the additional data
+            emailjs.send('service_zj9cs3c', 'template_4hhimvf', templateParams, {
+                attachments: attachments
+            })
+                .then(function (response) {
+                    // Hide loading spinner and show success message
+                    spinnerOverlay.classList.remove('show');
+                    document.getElementById("thank-you-message").style.display = "block";
+                    document.getElementById("thank-you-message").innerText = 'Thank you! Your response has been submitted.';
+                }, function (error) {
+                    console.error('Error:', error);
+                    alert("There was an issue submitting the form. Please try again.");
+                    spinnerOverlay.classList.remove('show');
+                });
+        } else {
+            alert("Please sign before submitting.");
+            document.getElementById("loading-spinner").style.display = "none"; // Hide spinner if not signed
         }
-
+    } else {
+        const name = document.getElementById("name").value;
         // EmailJS template parameters with additional fields
         const templateParams = {
             from_name: name,
+            invitation_status: `DECLINED`,
             browser_info: browserInfo,
             device_type: deviceType, // Device type (Mobile or Desktop)
             date_time_submitted: dateTimeSubmitted, // Date and time of submission
             time_elapsed: `${elapsedTime} seconds`, // Time taken to complete the page
-            signature_image: "cid:signature_image" // Use cid for inline attachment
         };
-
-        // Prepare attachment (signature image as a Base64 string)
-        const attachments = [
-            {
-                filename: "signature.png",
-                content: signature, // Remove the Base64 prefix
-                cid: "signature_image" // Use the same CID as in the template
-            }
-        ];
-
-        // Send email with EmailJS, including the additional data
-        emailjs.send('service_zj9cs3c', 'template_4hhimvf', templateParams, {
-            attachments: attachments
-        })
-        .then(function(response) {
-            // Hide loading spinner and show success message
-            spinnerOverlay.classList.remove('show');
-            document.getElementById("thank-you-message").style.display = "block";
-            document.getElementById("thank-you-message").innerText = 'Thank you! Your response has been submitted.';
-            signaturePad.clear(); // Clear the signature pad after submission
-        }, function(error) {
-            console.error('Error:', error);
-            alert("There was an issue submitting the form. Please try again.");
-            spinnerOverlay.classList.remove('show');
-        });
-    } else {
-        alert("Please sign before submitting.");
-        document.getElementById("loading-spinner").style.display = "none"; // Hide spinner if not signed
+        emailjs.send('service_zj9cs3c', 'template_4hhimvf', templateParams)
+            .then(function (response) {
+                // Hide loading spinner and show success message
+                spinnerOverlay.classList.remove('show');
+                document.getElementById("thank-you-message").style.display = "block";
+                document.getElementById("thank-you-message").innerText = 'Thank you! Your response has been submitted.';
+            }, function (error) {
+                console.error('Error:', error);
+                alert("There was an issue submitting the form. Please try again.");
+                spinnerOverlay.classList.remove('show');
+            });
+        return;
     }
 });
 
