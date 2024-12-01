@@ -1,6 +1,7 @@
 let signaturePad;
 let understand = false;
 let engage = false;
+const pageLoadStartTime = Date.now();
 
 // Show/Hide tab content
 function openTab(tabName) {
@@ -61,7 +62,6 @@ function handleUnderstandClick(value) {
 
 }
 
-// Handle agreement Yes/No click and show signature
 function handleAgreeClick(value) {
     var signatureBox = document.getElementById("signature-box");
     var submitBtn = document.getElementById("submit-btn");
@@ -72,12 +72,33 @@ function handleAgreeClick(value) {
         signatureBox.style.display = "block"; // Show signature box
         signatureBox.classList.add('show'); // Add class for fade effect
         submitBtn.style.display = "block"; // Show submit button
-        // submitBtn.classList.add('selected-yes'); // Add class for fade effect
         engage = true;
         engageMessage.style.display = "none";
         if (!signaturePad) {
             const canvas = document.getElementById('signature-pad');
             signaturePad = new SignaturePad(canvas);
+
+            // Resize canvas for high-DPI screens (e.g., Retina displays)
+            function resizeCanvas() {
+                const ratio = Math.max(window.devicePixelRatio || 1, 1);
+                canvas.width = canvas.offsetWidth * ratio;
+                canvas.height = canvas.offsetHeight * ratio;
+                canvas.getContext('2d').scale(ratio, ratio);
+            }
+
+            // Adjust touch coordinates
+            function getCanvasCoordinates(event) {
+                const rect = canvas.getBoundingClientRect();
+                const touch = event.touches[0]; // Get the first touch point
+                return {
+                    x: (touch.clientX - rect.left) * (canvas.width / rect.width),
+                    y: (touch.clientY - rect.top) * (canvas.height / rect.height),
+                };
+            }
+
+            // Resize canvas on load and window resize
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas(); // Call on initialization
         }
         showNextElementAndScroll("signature-box"); // Smoothly scroll to signature box
     } else {
@@ -125,6 +146,8 @@ document.getElementById("saveTheDateForm").addEventListener("submit", function (
         // Capture current date and time
         const dateTimeSubmitted = new Date().toLocaleString(); // Format as "MM/DD/YYYY, HH:MM:SS AM/PM"
 
+        const elapsedTime = Math.round((Date.now() - pageLoadStartTime) / 1000); // Time in seconds
+
         // Ensure all required fields are filled
         if (!understand || !engage) {
             alert("Please complete all fields.");
@@ -137,16 +160,23 @@ document.getElementById("saveTheDateForm").addEventListener("submit", function (
             browser_info: browserInfo,
             device_type: deviceType, // Device type (Mobile or Desktop)
             date_time_submitted: dateTimeSubmitted, // Date and time of submission
-            attachments: [
-                {
-                    filename: "signature.png",
-                    path: signature // Base64 string of the signature
-                }
-            ]
+            time_elapsed: `${elapsedTime} seconds`, // Time taken to complete the page
+            signature_image: "cid:signature_image" // Use cid for inline attachment
         };
 
+        // Prepare attachment (signature image as a Base64 string)
+        const attachments = [
+            {
+                filename: "signature.png",
+                content: signature, // Remove the Base64 prefix
+                cid: "signature_image" // Use the same CID as in the template
+            }
+        ];
+
         // Send email with EmailJS, including the additional data
-        emailjs.send('service_zj9cs3c', 'template_4hhimvf', templateParams)
+        emailjs.send('service_zj9cs3c', 'template_4hhimvf', templateParams, {
+            attachments: attachments
+        })
         .then(function(response) {
             // Hide loading spinner and show success message
             spinnerOverlay.classList.remove('show');

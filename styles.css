@@ -398,7 +398,7 @@ input::placeholder {
 
 /* Spinner styling */
 .spinner {
-  border: 16px solid var(--central-body-bg-color); 
+  border: 16px solid var(--tab-hover-color); 
   border-top: 16px solid var(--body-bg-color); 
   border-radius: 50%;
   width: 100px; /* Large size */
@@ -448,6 +448,18 @@ img {
 
 /* Responsive design */
 @media (max-width: 600px) {
+
+:root {
+  /* Global style variables */
+  --body-text-color: #FFFFFF;
+  --central-body-bg-color: #0B2B26;
+  --body-bg-color: #0B2B26;
+  --tab-hover-color: #317B22;
+  --error-text-color: #EE6123;
+  --text-font: 'Helvetica', sans-serif;
+  --text-font-size: 1.1rem;
+}
+
   h1 {
     font-size: 2rem;
   }
@@ -455,6 +467,17 @@ img {
   .tablink {
     font-size: 0.9rem;
     padding: 5px 10px;
+  }
+
+  .tabcontent {
+    display: none; /* Hidden by default */
+    padding: 10px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Ensure content is centered horizontally */
+    align-items: center; /* Center vertically */
+    box-sizing: border-box;
   }
 }
 
