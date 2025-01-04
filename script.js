@@ -179,6 +179,8 @@ document.getElementById("saveTheDateForm").addEventListener("submit", function (
                     spinnerOverlay.classList.remove('show');
                     document.getElementById("thank-you-message").style.display = "block";
                     document.getElementById("thank-you-message").innerText = 'Thank you! Your response has been submitted.';
+                     // Scroll to the bottom of the page
+                     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
                 }, function (error) {
                     console.error('Error:', error);
                     alert("There was an issue submitting the form. Please try again.");
@@ -205,6 +207,8 @@ document.getElementById("saveTheDateForm").addEventListener("submit", function (
                 spinnerOverlay.classList.remove('show');
                 document.getElementById("thank-you-message").style.display = "block";
                 document.getElementById("thank-you-message").innerText = 'Thank you! Your response has been submitted.';
+                 // Scroll to the bottom of the page
+                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
             }, function (error) {
                 console.error('Error:', error);
                 alert("There was an issue submitting the form. Please try again.");
