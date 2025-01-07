@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <img class = "need-heading" src="manthanol.png" />
+    <img class="need-heading" src="manthanol.png" />
     <!-- <div class="credit">
         <p class="credit-text">
             Illustration by George Kikugawa
@@ -36,42 +36,209 @@
 
         <div id="save-the-date" class="tabcontent">
 
-            <p class="faq-intro">We are hosting an intimate wedding to mark our commitment to one another.</p>
-            <p class="faq-invite">Conventional weddings aren&#39;t quite our style. 
-                <br>While we are deeply grateful for our whole community, we really want our wedding to include folks that have influenced our relationship.
-                We&#39;ve invited our family and friends who have taught us about love and have an active relationship with the both of us. </p>
-
-            <p class="faq-invite">We invite you to engage with us fully and have the following expectations for all our guests:</p>
+            <p class="faq-intro">We're getting married!</p>
+            <p class="faq-invite">We’re hosting an intimate and interactive wedding gathering. We invite you to engage
+                with us fully.</p>
+            <p class="faq-invite">Here's an overview of your journey to our wedding day:</p>
 
             <ul class="faq-list">
-                <li>You will thoughtfully complete a short questionnaire about love to help shape our wedding agenda.</li>
-                <li>You will earnestly participate in day-of activities to build connections within our community (think: icebreakers, structured conversations, assigned seating, etc!). 
-                    We have intentionally invited you and ask you join with an open mind. 
+                <li>Winter 2025: <strong>Receive the save-the-date:</strong> Yay! You’ve received the save-the-date
+                    because we are inviting our most favorite family and friends to our gathering. Now, review this
+                    website and <strong>complete the questionnaire</strong> below.</li>
+                <li>Spring 2025: <strong>Receive the formal invitation:</strong> In a couple of months, you’ll receive a
+                    formal invitation in the mail with a draft wedding day agenda, requests from us on what to bring,
+                    and FAQs. Then, you’ll <strong>RSVP</strong> on our website so we know who is joining.</li>
+                <li>Summer 2025: <strong>Prepare to engage</strong> in the wedding (more details to follow!) and then
+                    <strong>join our wedding day</strong> on August 8, 2025.
                 </li>
             </ul>
-
-            <!-- <p class="faq-consent">Do you agree to follow our requests to the best of your ability?</p>
-            <div class="faq-buttons"><button type="button" class="option-button"
-                    onclick="toggleSelection(this, 'yes'); handleAgreement('yes')">Yes</button>
-                <button type="button" class="option-button"
-                    onclick="toggleSelection(this, 'no'); handleAgreement('no')">No</button>
-            </div> -->
-
-
-
 
             <!-- Hidden message if the user clicks No -->
             <p id="no-message" style="display:none; margin-top: 20px;">Thank you for your honesty. Feel free to contact
                 us with any questions!</p>
 
+            <p class="faq-invite">Please spend 25 minutes filling out this questionnaire at length. Your answers will
+                inform our wedding agenda and day-of considerations: icebreakers, conversation prompts, and assigned
+                seating.
+                <strong>We will only send formal invitations to folks that earnestly fill out this form.</strong>
+                Please call or text us if you have any questions.
+            </p>
 
             <form id="saveTheDateForm">
                 <label for="name">Name:</label>
-                <input type="text" id="name" placeholder="Please type your full name" required>
+                <textarea id="name" class="horizontal-scrollbox" placeholder="Please type your full name"
+                    required></textarea>
                 <span id="name-error" class="error-message"></span>
+                <script>
+                    const nameInput = document.getElementById('name');
+                    const nameError = document.getElementById('name-error');
+
+                    nameInput.addEventListener('blur', () => {
+                        const nameValue = nameInput.value.trim();
+                        const nameIsValid = nameValue.split(/\s+/).length > 1;
+                        if (!nameIsValid) {
+                            nameError.textContent = "Please type your full name";
+                        } else {
+                            nameError.textContent = ""; // Clear the error message if there's text
+                        }
+                    });
+                </script>
+                <p>We spent our first date talking through <a href="https://www.werenotreallystrangers.com/"
+                        target="_blank" rel="noopener noreferrer">We're Not Really Strangers</a>
+                    prompts, a gift from Andi Casad (Mahal’s best friend). We included one of the prompts in each of
+                    your save-the-date letters. Which question did you receive? </p>
+                <textarea id="question-box" class="medium-scrollable-textbox" placeholder="Please enter your question"
+                    required></textarea>
+                <span id="question-box-error" class="error-message"></span>
+
+                <script>
+                    const questionInput = document.getElementById('question-box');
+                    const questionError = document.getElementById('question-box-error');
+
+                    questionInput.addEventListener('blur', () => {
+                        const questionValue = questionInput.value.trim().length; // Remove the parentheses
+                        if (questionValue === 0) { // Check if the input is empty
+                            questionError.textContent = "Please type your question above.";
+                        } else {
+                            questionError.textContent = ""; // Clear error message if valid
+                        }
+                    });
+                </script>
+
+                <p>What is your response to the prompt? If the question asks for one word, please answer with many
+                    words. If the question refers to an “us”, direct the question at anyone in your life, but specify
+                    who you chose in your response. <strong>Please explain your answer.</strong></p>
+                <textarea id="question-answer-box" class="scrollable-textbox" placeholder="Please type your answer here" required></textarea>
+                <div id="word-count" class="word-count">0/50</div>
+                <span id="question-answer-box-error" class="error-message"></span>
+                <script>
+                    const questionAnswerBox = document.getElementById('question-answer-box');
+                    const wordCountDisplay = document.getElementById('word-count');
+                    const questionAnswerBoxError = document.getElementById('question-answer-box-error');
+
+                    // Function to count words
+                    function countWords(text) {
+                        return text
+                            .replace(/\s+/g, ' ') // Replace multiple spaces with one
+                            .trim() // Trim leading and trailing whitespace
+                            .split(' ') // Split by spaces
+                            .filter(word => word.length > 1) // Ignore single-character "words"
+                            .length;
+                    }
+
+                    // Function to update word count
+                    function updateWordCount() {
+                        const wordCount = countWords(questionAnswerBox.value);
+                        wordCountDisplay.textContent = `${wordCount}/50`; // Update word count display
+                    }
+
+                    // Event listener for real-time word count
+                    questionAnswerBox.addEventListener('input', updateWordCount);
+
+                    // Validate only on blur (when user clicks away)
+                    questionAnswerBox.addEventListener('blur', () => {
+                        if (countWords(questionAnswerBox.value) < 50) {
+                            questionAnswerBoxError.textContent = `Your text must be at least 50 words`;
+                        } else {
+                            questionAnswerBoxError.textContent = ''; // Clear error message
+                        }
+                    });
+
+                    // Hide the error message when the text box is focused (typing starts)
+                    questionAnswerBox.addEventListener('focus', () => {
+                        questionAnswerBoxError.textContent = ''; // Clear error message when focusing on the text box
+                    });
+                </script>
+
+
+                <p>We think the people in our lives are really interesting. We love talking about our loved ones. Please
+                    share three fun family-friendly facts about yourself:</p>
+
+                <div class="fact-container">
+                    <textarea id="fact-1" class="horizontal-scrollbox" placeholder="Fun Fact 1" required></textarea>
+                    <span id="fact-1-error" class="error-message"></span>
+                </div>
+
+                <div class="fact-container">
+                    <textarea id="fact-2" class="horizontal-scrollbox" placeholder="Fun Fact 2" required></textarea>
+                    <span id="fact-2-error" class="error-message"></span>
+                </div>
+
+                <div class="fact-container">
+                    <textarea id="fact-3" class="horizontal-scrollbox" placeholder="Fun Fact 3" required></textarea>
+                    <span id="fact-3-error" class="error-message"></span>
+                </div>
+
+                <p>Please share a recipe to a dish that you associate with love (links are ok!):</p>
+                <textarea id="recipe-box" class="medium-scrollable-textbox" placeholder="Please enter your recipe"
+                    required></textarea>
+                <span id="recipe-box-error" class="error-message"></span>
+
+                <script>
+                    const recipeInput = document.getElementById('recipe-box');
+                    const recipeError = document.getElementById('recipe-box-error');
+
+                    recipeInput.addEventListener('blur', () => {
+                        const recipeValue = recipeInput.value.trim().length; // Get the length of the trimmed input
+                        if (recipeValue === 0) { // Check if the input is empty
+                            recipeError.textContent = "Please share your recipe or a URL to the recipe"; // Display error message
+                        } else {
+                            recipeError.textContent = ""; // Clear error message if valid
+                        }
+                    });
+                </script>
+
+                <p id="love-feeling-box-title">When was the first time you felt especially loved?</p>
+                <textarea id="love-feeling-box" class="scrollable-textbox" placeholder="Please share your story"required></textarea>
+                <span id="love-feeling-word-count" class="word-count">0/50</span>
+                <span id="love-feeling-error" class="error-message"></span>
+
+
+                <script>
+                    const loveFeelingTextbox = document.getElementById('love-feeling-box');
+                    const loveFeelingWordCount = document.getElementById('love-feeling-word-count');
+                    const loveFeelingError = document.getElementById('love-feeling-error');
+
+                    // Function to count words
+                    function countWords(text) {
+                        return text
+                            .replace(/\s+/g, ' ') // Replace multiple spaces with one
+                            .trim() // Trim leading and trailing whitespace
+                            .split(' ') // Split by spaces
+                            .filter(word => word.length > 1) // Ignore single-character "words"
+                            .length;
+                    }
+
+                    // Function to update word count
+                    function updateWordCount() {
+                        const wordCount = countWords(loveFeelingTextbox.value);
+                        loveFeelingWordCount.textContent = `${wordCount}/50`; // Update word count display
+                    }
+
+                    // Event listener for real-time word count
+                    loveFeelingTextbox.addEventListener('input', updateWordCount);
+
+                    // Validate only on blur (when user clicks away)
+                    loveFeelingTextbox.addEventListener('blur', () => {
+                        if (countWords(loveFeelingTextbox.value) < 50) {
+                            loveFeelingError.textContent = "Your text must be at least 50 words."; // Show error message
+                        } else {
+                            loveFeelingError.textContent = ''; // Clear error message
+                        }
+                    });
+
+                    // Hide the error message when the text box is focused (typing starts)
+                    loveFeelingTextbox.addEventListener('focus', () => {
+                        loveFeelingError.textContent = ''; // Clear error message when focusing on the text box
+                    });
+                </script>
+
+
+
+
 
                 <p id="understand-statement">Do you understand the expectations for our wedding? Our focus is building
-                    connections within our community.  </p>
+                    connections within our community. </p>
                 <div>
                     <button type="button" class="option-button" id="understand-positive-button"
                         onclick="toggleSelection(this, 'yes'); handleUnderstandClick('yes')">Yes</button>
@@ -80,7 +247,8 @@
                 </div>
                 <p id="confirmation-message" style="display:none;"></p>
                 <div id="follow-up" class="fade" style="display: none;">
-                    <p>Would you like formally accept this save-the-date and receive the formal invitation and wedding details?</p>
+                    <p>Would you like formally accept this save-the-date and receive the formal invitation and wedding
+                        details?</p>
                     <div>
                         <button type="button" class="option-button" id="engage-positive-button"
                             onclick="toggleSelection(this, 'yes'); handleAgreeClick('yes')">Yes</button>
@@ -95,7 +263,7 @@
                     <br>
                     <button type="button" class="clear-button" id="clear-signature">Clear</button>
                 </div>
-                <div class = "submit-container" id ="submit">
+                <div class="submit-container" id="submit">
                     <button type="submit" id="submit-btn">Submit</button>
                 </div>
 

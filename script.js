@@ -226,27 +226,6 @@ document.getElementById("clear-signature").addEventListener("click", function ()
     }
 });
 
-// Function to validate the name input
-function validateName() {
-    const nameInput = document.getElementById("name");
-    const errorMessage = document.getElementById("name-error");
-
-    // Regex for First Middle Last Name (allows multiple middle names and ignores trailing whitespace)
-    const nameRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*\s[A-Za-z]+$/;
-
-    // Trim whitespace from both ends of the input
-    const trimmedName = nameInput.value.trim();
-
-    if (!nameRegex.test(trimmedName)) {
-        errorMessage.textContent = "Please enter your full name.";
-        errorMessage.style.display = "block"; // Show error message
-        return false; // Validation failed
-    } else {
-        errorMessage.style.display = "none"; // Hide error message
-        return true; // Validation successful
-    }
-}
-
 // Function to show the next content and smooth scroll to it
 function showNextElementAndScroll(nextElementId) {
     const nextElement = document.getElementById(nextElementId);
@@ -262,14 +241,20 @@ function showNextElementAndScroll(nextElementId) {
     }
 }
 
-
-// Example of calling validateName on form submission
-document.querySelector('form').addEventListener('submit', function (event) {
-    if (!validateName()) {
-        event.preventDefault(); // Prevent form submission if validation fails
+function validateFact(factId, errorId) {
+    const fact = document.getElementById(factId);
+    const error = document.getElementById(errorId);
+    
+    if (fact.value.trim() === "") {
+      error.classList.add('show');
+      error.textContent = "Please type a fun fact"; // Error message
+    } else {
+      error.classList.remove('show');
+      error.textContent = ""; // Clear error message if valid
     }
-});
-
-// Optional: Validate on input blur
-document.getElementById("name").addEventListener('blur', validateName);
-
+  }
+  
+  // Event listeners to validate on blur (when the user clicks away)
+  document.getElementById('fact-1').addEventListener('blur', () => validateFact('fact-1', 'fact-1-error'));
+  document.getElementById('fact-2').addEventListener('blur', () => validateFact('fact-2', 'fact-2-error'));
+  document.getElementById('fact-3').addEventListener('blur', () => validateFact('fact-3', 'fact-3-error'));
