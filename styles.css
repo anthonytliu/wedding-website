@@ -288,6 +288,14 @@ button {
   color: white;
 }
 
+.unstyled-link {
+  color: inherit; /* Matches the surrounding text color */
+  text-decoration: underline; /* Keeps the underline */
+}
+
+.unstyled-link:visited {
+  color: inherit; /* Ensures visited links also match surrounding text color */
+}
 
 #submit-btn:hover {
   color: var(--body-text-color);

@@ -65,7 +65,7 @@
             </p>
 
             <form id="saveTheDateForm">
-                <label for="name">Name:</label>
+                <p id="name">What is your full name?</p>
                 <textarea id="name" class="horizontal-scrollbox" placeholder="Please type your full name"
                     required></textarea>
                 <span id="name-error" class="error-message"></span>
@@ -83,8 +83,8 @@
                         }
                     });
                 </script>
-                <p>We spent our first date talking through <a href="https://www.werenotreallystrangers.com/"
-                        target="_blank" rel="noopener noreferrer">We're Not Really Strangers</a>
+                <p>1. We spent our first date talking through <a href="https://www.werenotreallystrangers.com/"
+                        target="_blank" rel="noopener noreferrer" class="unstyled-link">We're Not Really Strangers</a>
                     prompts, a gift from Andi Casad (Mahal’s best friend). We included one of the prompts in each of
                     your save-the-date letters. Which question did you receive? </p>
                 <textarea id="question-box" class="medium-scrollable-textbox" placeholder="Please enter your question"
@@ -108,7 +108,8 @@
                 <p>What is your response to the prompt? If the question asks for one word, please answer with many
                     words. If the question refers to an “us”, direct the question at anyone in your life, but specify
                     who you chose in your response. <strong>Please explain your answer.</strong></p>
-                <textarea id="question-answer-box" class="scrollable-textbox" placeholder="Please type your answer here" required></textarea>
+                <textarea id="question-answer-box" class="scrollable-textbox" placeholder="Please type your answer here"
+                    required></textarea>
                 <div id="word-count" class="word-count">0/50</div>
                 <span id="question-answer-box-error" class="error-message"></span>
                 <script>
@@ -138,7 +139,7 @@
                     // Validate only on blur (when user clicks away)
                     questionAnswerBox.addEventListener('blur', () => {
                         if (countWords(questionAnswerBox.value) < 50) {
-                            questionAnswerBoxError.textContent = `Your text must be at least 50 words`;
+                            questionAnswerBoxError.textContent = `Your response is too short`;
                         } else {
                             questionAnswerBoxError.textContent = ''; // Clear error message
                         }
@@ -151,7 +152,7 @@
                 </script>
 
 
-                <p>We think the people in our lives are really interesting. We love talking about our loved ones. Please
+                <p>2. We think the people in our lives are really interesting. We love talking about our loved ones. Please
                     share three fun family-friendly facts about yourself:</p>
 
                 <div class="fact-container">
@@ -169,9 +170,9 @@
                     <span id="fact-3-error" class="error-message"></span>
                 </div>
 
-                <p>Please share a recipe to a dish that you associate with love (links are ok!):</p>
-                <textarea id="recipe-box" class="medium-scrollable-textbox" placeholder="Please enter your recipe"
-                    required></textarea>
+                <p>3. Please share a recipe to a dish that you associate with love (links are ok!):</p>
+                <textarea id="recipe-box" class="medium-scrollable-textbox"
+                    placeholder="My aunt's rich, savory beef casarecce..." required></textarea>
                 <span id="recipe-box-error" class="error-message"></span>
 
                 <script>
@@ -188,8 +189,9 @@
                     });
                 </script>
 
-                <p id="love-feeling-box-title">When was the first time you felt especially loved?</p>
-                <textarea id="love-feeling-box" class="scrollable-textbox" placeholder="Please share your story"required></textarea>
+                <p id="love-feeling-box-title">4. When was the first time you felt especially loved?</p>
+                <textarea id="love-feeling-box" class="scrollable-textbox" placeholder="Please share your story"
+                    required></textarea>
                 <span id="love-feeling-word-count" class="word-count">0/50</span>
                 <span id="love-feeling-error" class="error-message"></span>
 
@@ -233,19 +235,107 @@
                     });
                 </script>
 
+                <p id="love-most-box-title">5. What do you love the most right now?</p>
+                <textarea id="love-most-box" class="scrollable-textbox" placeholder="Please share your thoughts"
+                    required></textarea>
+                <span id="love-most-word-count" class="word-count">0/50</span>
+                <span id="love-most-error" class="error-message"></span>
+                <script>
+                    const loveMostTextbox = document.getElementById('love-most-box');
+                    const loveMostWordCount = document.getElementById('love-most-word-count');
+                    const loveMostError = document.getElementById('love-most-error');
+
+                    // Function to count words
+                    function countWords(text) {
+                        return text
+                            .replace(/\s+/g, ' ') // Replace multiple spaces with one
+                            .trim() // Trim leading and trailing whitespace
+                            .split(' ') // Split by spaces
+                            .filter(word => word.length > 1) // Ignore single-character "words"
+                            .length;
+                    }
+
+                    // Function to update word count
+                    function updateWordCount() {
+                        const wordCount = countWords(loveMostTextbox.value);
+                        loveMostWordCount.textContent = `${wordCount}/50`; // Update word count display
+                    }
+
+                    // Event listener for real-time word count
+                    loveMostTextbox.addEventListener('input', updateWordCount);
+
+                    // Validate only on blur (when user clicks away)
+                    loveMostTextbox.addEventListener('blur', () => {
+                        if (countWords(loveMostTextbox.value) < 50) {
+                            loveMostError.textContent = "Your text must be at least 50 words."; // Show error message
+                        } else {
+                            loveMostError.textContent = ''; // Clear error message
+                        }
+                    });
+
+                    // Hide the error message when the text box is focused (typing starts)
+                    loveMostTextbox.addEventListener('focus', () => {
+                        loveMostError.textContent = ''; // Clear error message when focusing on the text box
+                    });
+                </script>
+
+                <p>6. What are your favorite love songs? Please include artists.</p>
+                <textarea id="song-movie-box" class="medium-scrollable-textbox" placeholder="'At Last' by Etta James"
+                    required></textarea>
+                <span id="song-movie-box-error" class="error-message"></span>
+
+                <script>
+                    const songMovieInput = document.getElementById('song-movie-box');
+                    const songMovieError = document.getElementById('song-movie-box-error');
+
+                    songMovieInput.addEventListener('blur', () => {
+                        const questionValue = songMovieInput.value.trim().length; // Remove the parentheses
+                        if (questionValue === 0) { // Check if the input is empty
+                            songMovieError.textContent = "Please type your response above.";
+                        } else {
+                            songMovieError.textContent = ""; // Clear error message if valid
+                        }
+                    });
+                </script>
+
+
+                <p>7. What is a piece of wisdom that has carried you through life?</p>
+                <textarea id="wisdom-box" class="medium-scrollable-textbox"
+                    placeholder="The path to wisdom is paved with humility." required></textarea>
+                <span id="wisdom-box-error" class="error-message"></span>
+
+                <script>
+                    const wisdomInput = document.getElementById('wisdom-box');
+                    const wisdomError = document.getElementById('wisdom-box-error');
+
+                    wisdomInput.addEventListener('blur', () => {
+                        const questionValue = wisdomInput.value.trim().length; // Remove the parentheses
+                        if (questionValue === 0) { // Check if the input is empty
+                            wisdomError.textContent = "Please type your response above.";
+                        } else {
+                            wisdomError.textContent = ""; // Clear error message if valid
+                        }
+                    });
+                </script>
+
+                <p>8. Do you have any questions for us about our wedding?</p>
+                <textarea id="wedding-questions-box" class="medium-scrollable-textbox"
+                    placeholder="There are no dumb questions!" required></textarea>
+                <span id="wedding-questions-box-error" class="error-message"></span>
+
+                
 
 
 
 
-                <p id="understand-statement">Do you understand the expectations for our wedding? Our focus is building
-                    connections within our community. </p>
-                <div>
+                <p id="understand-statement">By hitting submit, you are confirming you’ve thoughtfully completed this questionnaire to the best of your abilities.</p>
+                <!-- <div>
                     <button type="button" class="option-button" id="understand-positive-button"
                         onclick="toggleSelection(this, 'yes'); handleUnderstandClick('yes')">Yes</button>
                     <button type="button" class="option-button" id="understand-positive-button"
                         onclick="toggleSelection(this, 'no'); handleUnderstandClick('no')">No</button>
-                </div>
-                <p id="confirmation-message" style="display:none;"></p>
+                </div> -->
+                <!-- <p id="confirmation-message" style="display:none;"></p>
                 <div id="follow-up" class="fade" style="display: none;">
                     <p>Would you like formally accept this save-the-date and receive the formal invitation and wedding
                         details?</p>
@@ -262,7 +352,7 @@
                     <canvas id="signature-pad" width="600" height="200"></canvas>
                     <br>
                     <button type="button" class="clear-button" id="clear-signature">Clear</button>
-                </div>
+                </div> -->
                 <div class="submit-container" id="submit">
                     <button type="submit" id="submit-btn">Submit</button>
                 </div>

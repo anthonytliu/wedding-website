@@ -136,93 +136,90 @@ document.getElementById("saveTheDateForm").addEventListener("submit", function (
     const deviceType = /Mobile|Android|iP(hone|od|ad)/i.test(navigator.userAgent) ? "Mobile" : "Desktop";
     const dateTimeSubmitted = new Date().toLocaleString(); // Format as "MM/DD/YYYY, HH:MM:SS AM/PM"
     const elapsedTime = Math.round((Date.now() - pageLoadStartTime) / 1000); // Time in seconds
-    // Check if the signature pad is filled
-    if (!validateName) {
-        return;
-    } else if (document.getElementById("signature-box").style.display === 'block') {
-        if (signaturePad && !signaturePad.isEmpty()) {
-            const name = document.getElementById("name").value;
-            const signature = signaturePad.toDataURL("image/png"); // Capture signature as Base64
 
-            // Ensure all required fields are filled
-            if (!understand || !engage) {
-                alert("Please complete all fields.");
-                return;
-            }
+    if (areAllErrorsEmpty) {
+        const nameInput = document.getElementById('name');
+        const questionInput = document.getElementById('question-box');
+        const questionAnswerBox = document.getElementById('question-answer-box');
+        const fact1Input = document.getElementById('fact-1');
+        const fact2Input = document.getElementById('fact-2');
+        const fact3Input = document.getElementById('fact-3');
+        const recipeInput = document.getElementById('recipe-box');
+        const loveFeelingTextbox = document.getElementById('love-feeling-box');
+        const loveMostTextbox = document.getElementById('love-most-box');
+        const songMovieInput = document.getElementById('song-movie-box');
+        const wisdomInput = document.getElementById('wisdom-box');
+        const weddingQuestionsBox = document.getElementById('wedding-questions-box');
 
-            // EmailJS template parameters with additional fields
-            const templateParams = {
-                from_name: name,
-                invitation_status: `ACCEPTED`,
-                browser_info: browserInfo,
-                device_type: deviceType, // Device type (Mobile or Desktop)
-                date_time_submitted: dateTimeSubmitted, // Date and time of submission
-                time_elapsed: `${elapsedTime} seconds`, // Time taken to complete the page
-                signature_image: "cid:signature_image" // Use cid for inline attachment
-            };
-
-            // Prepare attachment (signature image as a Base64 string)
-            const attachments = [
-                {
-                    filename: "signature.png",
-                    content: signature, // Remove the Base64 prefix
-                    cid: "signature_image" // Use the same CID as in the template
-                }
-            ];
-
-            // Send email with EmailJS, including the additional data
-            emailjs.send('service_zj9cs3c', 'template_4hhimvf', templateParams, {
-                attachments: attachments
-            })
-                .then(function (response) {
-                    // Hide loading spinner and show success message
-                    spinnerOverlay.classList.remove('show');
-                    document.getElementById("thank-you-message").style.display = "block";
-                    document.getElementById("thank-you-message").innerText = 'Thank you! Your response has been submitted.';
-                     // Scroll to the bottom of the page
-                     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-                }, function (error) {
-                    console.error('Error:', error);
-                    alert("There was an issue submitting the form. Please try again.");
-                    spinnerOverlay.classList.remove('show');
-                });
-        } else {
-            alert("Please sign before submitting.");
-            document.getElementById("loading-spinner").style.display = "none"; // Hide spinner if not signed
-        }
-    } else {
-        const name = document.getElementById("name").value;
-        // EmailJS template parameters with additional fields
         const templateParams = {
-            from_name: name,
-            invitation_status: `DECLINED`,
+            from_name: nameInput.value,
+            invitation_status: `ACCEPTED`,
             browser_info: browserInfo,
-            device_type: deviceType, // Device type (Mobile or Desktop)
-            date_time_submitted: dateTimeSubmitted, // Date and time of submission
-            time_elapsed: `${elapsedTime} seconds`, // Time taken to complete the page
+            device_type: deviceType,
+            date_time_submitted: dateTimeSubmitted,
+            time_elapsed: `${elapsedTime} seconds`,
+            question_input: questionInput.value,
+            question_answer_input: questionAnswerBox.value,
+            fact_1: fact1Input.value,
+            fact_2: fact2Input.value,
+            fact_3: fact3Input.value,
+            recipe_input: recipeInput.value,
+            love_feeling_input: loveFeelingTextbox.value,
+            love_most_input: loveMostTextbox.value,
+            song_movie_input: songMovieInput.value,
+            wisdom_input: wisdomInput.value,
+            wedding_questions_input: weddingQuestionsBox.value
         };
+
+        // Send email with EmailJS, including the additional data
         emailjs.send('service_zj9cs3c', 'template_4hhimvf', templateParams)
             .then(function (response) {
                 // Hide loading spinner and show success message
                 spinnerOverlay.classList.remove('show');
                 document.getElementById("thank-you-message").style.display = "block";
                 document.getElementById("thank-you-message").innerText = 'Thank you! Your response has been submitted.';
-                 // Scroll to the bottom of the page
-                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                // Scroll to the bottom of the page
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
             }, function (error) {
                 console.error('Error:', error);
                 alert("There was an issue submitting the form. Please try again.");
                 spinnerOverlay.classList.remove('show');
             });
-        return;
+    } else {
+        spinnerOverlay.classList.remove('show');
+
     }
 });
 
 
-// Clear signature button
-document.getElementById("clear-signature").addEventListener("click", function () {
-    if (signaturePad) {
-        signaturePad.clear();
+// // Clear signature button
+// document.getElementById("clear-signature").addEventListener("click", function () {
+//     if (signaturePad) {
+//         signaturePad.clear();
+//     }
+// });
+
+// Collect all error message spans
+const errorMessages = document.querySelectorAll('.error-message');
+
+// Function to check if all errors are empty
+function areAllErrorsEmpty() {
+    for (const error of errorMessages) {
+        if (error.textContent.trim() !== '') {
+            return false; // Found an error message
+        }
+    }
+    return true; // All errors are empty
+}
+
+// Example usage: Check when a button is clicked
+const submitButton = document.getElementById('submit-button'); // Replace with your button's ID
+submitButton.addEventListener('click', (event) => {
+    if (!areAllErrorsEmpty()) {
+        event.preventDefault(); // Prevent form submission
+        alert('Please fix all errors before submitting the form.');
+    } else {
+        alert('Form submitted successfully!');
     }
 });
 
@@ -244,17 +241,17 @@ function showNextElementAndScroll(nextElementId) {
 function validateFact(factId, errorId) {
     const fact = document.getElementById(factId);
     const error = document.getElementById(errorId);
-    
+
     if (fact.value.trim() === "") {
-      error.classList.add('show');
-      error.textContent = "Please type a fun fact"; // Error message
+        error.classList.add('show');
+        error.textContent = "Please type a fun fact"; // Error message
     } else {
-      error.classList.remove('show');
-      error.textContent = ""; // Clear error message if valid
+        error.classList.remove('show');
+        error.textContent = ""; // Clear error message if valid
     }
-  }
-  
-  // Event listeners to validate on blur (when the user clicks away)
-  document.getElementById('fact-1').addEventListener('blur', () => validateFact('fact-1', 'fact-1-error'));
-  document.getElementById('fact-2').addEventListener('blur', () => validateFact('fact-2', 'fact-2-error'));
-  document.getElementById('fact-3').addEventListener('blur', () => validateFact('fact-3', 'fact-3-error'));
+}
+
+// Event listeners to validate on blur (when the user clicks away)
+document.getElementById('fact-1').addEventListener('blur', () => validateFact('fact-1', 'fact-1-error'));
+document.getElementById('fact-2').addEventListener('blur', () => validateFact('fact-2', 'fact-2-error'));
+document.getElementById('fact-3').addEventListener('blur', () => validateFact('fact-3', 'fact-3-error'));
