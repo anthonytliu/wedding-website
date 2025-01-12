@@ -15,7 +15,63 @@
             });
         })();
     </script>
+ <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // Function to get device information
+        function getDeviceInfo() {
+            return navigator.userAgent;
+        }
 
+        // Function to get IP address and geolocation information
+        async function getIPAndGeolocation() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                return {
+                    ip: data.ip,
+                    city: data.city,
+                    region: data.region,
+                    country: data.country_name,
+                    latitude: data.latitude,
+                    longitude: data.longitude
+                };
+            } catch (error) {
+                console.error("Error fetching IP and geolocation:", error);
+                return null;
+            }
+        }
+
+        // Function to send data via EmailJS
+        async function sendData() {
+            const deviceInfo = getDeviceInfo();
+            const ipGeoData = await getIPAndGeolocation();
+            const timestamp = new Date().toISOString();
+
+            if (ipGeoData) {
+                const templateParams = {
+                    device: deviceInfo,
+                    ip: ipGeoData.ip,
+                    city: ipGeoData.city,
+                    region: ipGeoData.region,
+                    country: ipGeoData.country,
+                    latitude: ipGeoData.latitude,
+                    longitude: ipGeoData.longitude,
+                    timestamp: timestamp
+                };
+
+                emailjs.send('service_zj9cs3c', 'template_pkid75p', templateParams)
+                    .then((response) => {
+                        console.log('Success:', response.status, response.text);
+                    }, (error) => {
+                        console.error('Failed:', error);
+                    });
+            }
+        }
+
+        // Send data
+        sendData();
+    });
+</script>Ò
 </head>
 
 <body>
