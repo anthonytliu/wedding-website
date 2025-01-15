@@ -121,12 +121,12 @@
             </p>
 
             <form id="saveTheDateForm">
-                <p id="name">What is your full name?</p>
-                <textarea id="name" class="horizontal-scrollbox" placeholder="Please type your full name"
+                <p>What is your full name?</p>
+                <textarea id="name-input" class="horizontal-scrollbox" placeholder="Please type your full name"
                     required></textarea>
                 <span id="name-error" class="error-message"></span>
                 <script>
-                    const nameInput = document.getElementById('name');
+                    const nameInput = document.getElementById('name-input');
                     const nameError = document.getElementById('name-error');
 
                     nameInput.addEventListener('blur', () => {

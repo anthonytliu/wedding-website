@@ -138,7 +138,7 @@ document.getElementById("saveTheDateForm").addEventListener("submit", function (
     const elapsedTime = Math.round((Date.now() - pageLoadStartTime) / 1000); // Time in seconds
 
     if (areAllErrorsEmpty) {
-        const nameInput = document.getElementById('name');
+        const nameInput = document.getElementById('name-input');
         const questionInput = document.getElementById('question-box');
         const questionAnswerBox = document.getElementById('question-answer-box');
         const fact1Input = document.getElementById('fact-1');
