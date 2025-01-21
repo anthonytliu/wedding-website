@@ -195,7 +195,7 @@
                     // Validate only on blur (when user clicks away)
                     questionAnswerBox.addEventListener('blur', () => {
                         if (countWords(questionAnswerBox.value) < 50) {
-                            questionAnswerBoxError.textContent = `Your response is too short`;
+                            questionAnswerBoxError.textContent = `Your text must be at least 50 words.`;
                         } else {
                             questionAnswerBoxError.textContent = ''; // Clear error message
                         }

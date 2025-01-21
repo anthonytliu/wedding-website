@@ -137,7 +137,10 @@ document.getElementById("saveTheDateForm").addEventListener("submit", function (
     const dateTimeSubmitted = new Date().toLocaleString(); // Format as "MM/DD/YYYY, HH:MM:SS AM/PM"
     const elapsedTime = Math.round((Date.now() - pageLoadStartTime) / 1000); // Time in seconds
 
-    if (areAllErrorsEmpty) {
+    const submitButton = document.querySelector('#saveTheDateForm button[type="submit"]');
+    submitButton.disabled = true; // Disable the submit button to prevent multiple submissions
+
+    if (areAllErrorsEmpty()) { // Use parentheses to invoke the function
         const nameInput = document.getElementById('name-input');
         const questionInput = document.getElementById('question-box');
         const questionAnswerBox = document.getElementById('question-answer-box');
@@ -180,17 +183,19 @@ document.getElementById("saveTheDateForm").addEventListener("submit", function (
                 document.getElementById("thank-you-message").innerText = 'Thank you! Your response has been submitted.';
                 // Scroll to the bottom of the page
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                submitButton.disabled = false; // Re-enable the submit button
             }, function (error) {
                 console.error('Error:', error);
                 alert("There was an issue submitting the form. Please try again.");
                 spinnerOverlay.classList.remove('show');
+                submitButton.disabled = false; // Re-enable the submit button
             });
     } else {
         spinnerOverlay.classList.remove('show');
-
+        submitButton.disabled = false; // Re-enable the submit button
+        scrollToFirstError(); // Scroll to the first error message
     }
 });
-
 
 // // Clear signature button
 // document.getElementById("clear-signature").addEventListener("click", function () {
@@ -204,6 +209,7 @@ const errorMessages = document.querySelectorAll('.error-message');
 
 // Function to check if all errors are empty
 function areAllErrorsEmpty() {
+    const errorMessages = document.querySelectorAll('.error-message');
     for (const error of errorMessages) {
         if (error.textContent.trim() !== '') {
             return false; // Found an error message
@@ -211,6 +217,17 @@ function areAllErrorsEmpty() {
     }
     return true; // All errors are empty
 }
+
+function scrollToFirstError() {
+    const errorMessages = document.querySelectorAll('.error-message');
+    for (const error of errorMessages) {
+        if (error.textContent.trim() !== '') {
+            error.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            break;
+        }
+    }
+}
+
 
 // Example usage: Check when a button is clicked
 const submitButton = document.getElementById('submit-button'); // Replace with your button's ID
