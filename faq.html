@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "BsCLOP3B4Q49mXa-N",
+            });
+        })();
+    </script>
+    <style>
+        a {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <img class="need-heading" src="manthanol.png" />
+    <div class="central-body">
+        <h1>August 8th, 2025, 3:45pm - 9:00pm</h1>
+        <p class="faq-intro">Sunnyside Conservatory + Naked Kitchen + Southern Pacific Brewing</p>
+        <div id="save-the-date" class="tabcontent">
+
+        <div class = "faq-invite">
+            <h2 >Directions</h2>
+            <p class="faq-invite">Please use ride-sharing if possible as street parking is very limited. There will be several steps descending down to the conservatory.</p>
+            <ul class="faq-list">
+                <li><strong>Sunnyside Conservatory:</strong> <a href="https://www.google.com/maps/place/232+Joost+Avenue,+San+Francisco,+CA+94131" target="_blank">232 Joost Avenue, San Francisco, CA 94131</a></li>
+                <li><strong>Naked Kitchen:</strong> <a href="https://www.google.com/maps/place/945+Valencia+Street,+San+Francisco,+CA+94110" target="_blank">945 Valencia Street, San Francisco, CA 94110</a></li>
+                <li><strong>Southern Pacific Brewing:</strong> <a href="https://www.google.com/maps/place/620+Treat+Ave,+San+Francisco,+CA+94110" target="_blank">620 Treat Ave, San Francisco, CA 94110</a></li>
+            </ul>
+            </div>  
+
+        <div class="faq-invite">
+            <h2>Schedule</h2>
+            <ul class="faq-list">
+                <li><strong>3:45 pm</strong> - Please arrive promptly for seating at <strong><a href="https://www.google.com/maps/place/232+Joost+Avenue,+San+Francisco,+CA+94131" target="_blank">Sunnyside Conservatory</a></strong></li>
+                <li><strong>4:00 pm</strong> - Ceremony Begins</li>
+                <li><strong>5:00 pm</strong> - Cocktail Hour at <strong><a href="https://www.google.com/maps/place/945+Valencia+Street,+San+Francisco,+CA+94110" target="_blank">Naked Kitchen</a></strong></li>
+                <li><strong>6:00 pm</strong> - Wine & Dine</li>
+                <li><strong>9:00 pm</strong> - After Party at <strong><a href="https://www.google.com/maps/place/620+Treat+Ave,+San+Francisco,+CA+94110" target="_blank">Southern Pacific Brewing</a></strong></li>
+            </ul>
+        </div>
+
+        <div class="faq-invite">
+            <h2>Dress</h2>
+            <p>We want you to feel beautiful & comfortable – think elegant greenhouse garden date.</p>
+            <p>Please wear darker shades of blue, green, brown, grey, or black. Florals and patterns welcome. Please no jeans, sandals, or casual wear. SF is chilly in August, so plan for layers.</p>
+        </div>
+
+        <div class="faq-invite">
+            <h2>Lodging</h2>
+            <p>We recommend staying in the southern or central part of the city. Neighborhoods we suggest are the Mission District, Castro, and Panhandle.</p>
+            <p>Some hotels we recommend are:</p>
+            <ul>
+                <li>Hotel 1</li>
+                <li>Hotel 2</li>
+                <li>Hotel 3</li>
+            </ul>
+        </div>
+
+        <div class="faq-invite">
+            <h2>Dietary Restrictions</h2>
+            <form>
+                <h3>Name:</h3>
+                <textarea id="name-input-faq" class="horizontal-scrollbox" placeholder="Please type your full name"
+                    required></textarea>
+                <span id="name-error-faq" class="error-message"></span>
+                <script>
+                    const nameInput = document.getElementById('name-input-faq');
+                    const nameError = document.getElementById('name-error-faq');
+
+                    nameInput.addEventListener('blur', () => {
+                        const nameValue = nameInput.value.trim();
+                        const nameIsValid = nameValue.split(/\s+/).length > 1;
+                        if (!nameIsValid) {
+                            nameError.textContent = "Please type your full name";
+                        } else {
+                            nameError.textContent = ""; // Clear the error message if there's text
+                        }
+                    });
+                </script>
+                <h3>Allergy or Dietary Restrictions:</h3>
+                <textarea id="allergy-input" class="horizontal-scrollbox" placeholder="Please include anything you are allergic or intolerant to"
+                    required></textarea>
+            </form>
+        </div>
+
+        <div class="section">
+            <h2>FAQs</h2>
+            <h3><em>What should I wear?</em></h3>
+            <p>Please see “Dress” above. Feel free to send us any questions or outfit ideas!</p>
+            <br>
+
+            <h3><em>Can I bring a plus one?</em></h3>
+            <p>Due to the intimate and interactive nature of our wedding, we’ve selected venues that have limited capacity. Every guest who is invited will be explicitly listed on the invitation.</p>
+            <br>
+
+            <h3><em>Can I bring my children?</em></h3>
+            <p>Similar to our answer to plus ones, only those who have invitations can attend.</p>
+            <br>
+
+            <h3><em>Will the venue be outdoors or indoors?</em></h3>
+            <p>The ceremony will be indoors. The cocktail hour will be on a backyard patio. The dinner will be indoors. The after party will be at a brewery with both indoor and outdoor seating. Bring layers!</p>
+            <br>
+
+            <h3><em>Accessibility</em></h3>
+            <p>The Sunnyside Conservatory address we’ve linked directs to a street address with a few not-too-steep stairs along with handrails. If you are more comfortable using a ramp, we highly recommend routing to the Sunnyside Conservatory main entrance at 236 Monterey Blvd, San Francisco, CA 94131.</p>
+            <br>
+
+            <h3><em>Will there be parking?</em></h3>
+            <p>No, unfortunately, none of the venues have accessible parking. If you are driving to the venues, we recommend budgeting a generous amount of time to find parking. If you opt for public transport, please account for potential delays. It’s very important to us that folks are on time to the ceremony (3:45pm sharp!) in particular.</p>
+            <br>
+
+            <h3><em>What kind of food will be served?</em></h3>
+            <p>We will be serving Filipino and Chinese-influenced New American cuisine with a focus on local, farm-to-table food. Please let us know of any dietary restrictions you may have so that you can enjoy the meal to its fullest.</p>
+            <br>
+
+            <h3><em>Will there be alcohol?</em></h3>
+            <p>Yes, we will have a small selection of alcoholic and non-alcoholic beverages during the cocktail hour so that everyone can participate. If you elect to bring your own alcoholic beverage, you will be firmly asked to leave our gathering.</p>
+            <br>
+
+            <h3><em>Do I have to attend the after party?</em></h3>
+            <p>No – only warm invitation, no obligation.</p>
+            <br>
+
+            <h3><em>What do you mean by “intimate and interactive” gathering?</em></h3>
+            <p>We really want our community to learn more about one another and celebrate love. We appreciate the time, care, and intent you have all brought to the save-the-date questionnaire responses. We will use components of the questionnaire to create icebreaker-style materials for our ceremony, cocktail hour, and dinner. Please reach out if you are curious about specific ways we are planning to do this!</p>
+            <br>
+
+            <h3><em>Can I take pictures during the wedding?</em></h3>
+            <p>We really want everyone to be present in the moment. We’ll have a skilled and creative photographer (Anna Gillespie) and videographer (Emma Burke) documenting everything, so please keep phones and cameras away during the ceremony.</p>
+            <br>
+
+            <h3><em>What about gifts?</em></h3>
+            <p>Your love and presence on our special day is truly the greatest gift we could ask for! We feel deeply grateful to have everything we need...</p>
+        </div>
+        </div>
+    </div>
+    <img src="birdsw.svg" />
+    <div class="credit">
+        <p class="credit-text">
+            "Anthony and Mahal" by George Kikugawa (Age 7), "Tandem Lovebirds" by Anthony Liu (Age 27)
+        </p>
+    </div>
+</body>
+
+</html>
