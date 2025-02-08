@@ -15,80 +15,13 @@
             });
         })();
     </script>
- <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        // Function to get device information
-        function getDeviceInfo() {
-            return navigator.userAgent;
-        }
-
-        // Function to get IP address and geolocation information
-        async function getIPAndGeolocation() {
-            try {
-                const response = await fetch('https://ipapi.co/json/');
-                const data = await response.json();
-                return {
-                    ip: data.ip,
-                    city: data.city,
-                    region: data.region,
-                    country: data.country_name,
-                    latitude: data.latitude,
-                    longitude: data.longitude
-                };
-            } catch (error) {
-                console.error("Error fetching IP and geolocation:", error);
-                return null;
-            }
-        }
-
-        // Function to send data via EmailJS
-        async function sendData() {
-            const deviceInfo = getDeviceInfo();
-            const ipGeoData = await getIPAndGeolocation();
-            const timestamp = new Date().toISOString();
-
-            if (ipGeoData) {
-                const templateParams = {
-                    device: deviceInfo,
-                    ip: ipGeoData.ip,
-                    city: ipGeoData.city,
-                    region: ipGeoData.region,
-                    country: ipGeoData.country,
-                    latitude: ipGeoData.latitude,
-                    longitude: ipGeoData.longitude,
-                    timestamp: timestamp
-                };
-
-                emailjs.send('service_zj9cs3c', 'template_pkid75p', templateParams)
-                    .then((response) => {
-                        console.log('Success:', response.status, response.text);
-                    }, (error) => {
-                        console.error('Failed:', error);
-                    });
-            }
-        }
-
-        // Send data
-        sendData();
-    });
-</script>
 </head>
 
 <body>
     <img class="need-heading" src="manthanol.png" />
-    <!-- <div class="credit">
-        <p class="credit-text">
-            Illustration by George Kikugawa
-        </p>
-    </div> -->
+
     <div class="central-body">
         <h1>Anthony & Mahal's Wedding</h1>
-
-        <!-- <div class="tabs">
-            <button class="tablink" onclick="openTab('save-the-date')">Save the Date</button>
-            <button class="tablink" onclick="openTab('details')">Details</button>
-            <button class="tablink" onclick="openTab('faqs')">FAQs</button>
-        </div> -->
 
         <div id="save-the-date" class="tabcontent">
 
@@ -109,10 +42,6 @@
                 </li>
             </ul>
  
-            <!-- Hidden message if the user clicks No -->
-            <!-- <p id="no-message" style="display:none; margin-top: 20px;">Thank you for your honesty. Feel free to contact
-                us with any questions!</p> -->
-
             <p class="faq-invite">Please spend at least 25 minutes thoughtfully filling out the form below. Your responses will
                 inform our wedding agenda, including: icebreakers, conversation prompts, and assigned
                 seating. Please call or text us if you have any questions. <br><br>
@@ -120,7 +49,7 @@
                
             </p>
 
-            <form id="saveTheDateForm">
+            <form id="saveTheDateForm">submit
                 <p>What is your full name?</p>
                 <textarea id="name-input" class="horizontal-scrollbox" placeholder="Please type your full name"
                     required></textarea>
@@ -379,36 +308,7 @@
                     placeholder="There are no dumb questions!" required></textarea>
                 <span id="wedding-questions-box-error" class="error-message"></span>
 
-                
-
-
-
-
                 <p id="understand-statement">By hitting submit, you are confirming you’ve thoughtfully completed this questionnaire to the best of your abilities.</p>
-                <!-- <div>
-                    <button type="button" class="option-button" id="understand-positive-button"
-                        onclick="toggleSelection(this, 'yes'); handleUnderstandClick('yes')">Yes</button>
-                    <button type="button" class="option-button" id="understand-positive-button"
-                        onclick="toggleSelection(this, 'no'); handleUnderstandClick('no')">No</button>
-                </div> -->
-                <!-- <p id="confirmation-message" style="display:none;"></p>
-                <div id="follow-up" class="fade" style="display: none;">
-                    <p>Would you like formally accept this save-the-date and receive the formal invitation and wedding
-                        details?</p>
-                    <div>
-                        <button type="button" class="option-button" id="engage-positive-button"
-                            onclick="toggleSelection(this, 'yes'); handleAgreeClick('yes')">Yes</button>
-                        <button type="button" class="option-button" id="engage-negative-button"
-                            onclick="toggleSelection(this, 'no'); handleAgreeClick('no')">No</button>
-                    </div>
-                </div>
-                <p id="engage-message" style="display:none;"></p>
-                <div id="signature-box" class="fade" style="display:none;">
-                    <p>Please sign below in acknowledgement that you’ve reviewed this page in its entirety.</p>
-                    <canvas id="signature-pad" width="600" height="200"></canvas>
-                    <br>
-                    <button type="button" class="clear-button" id="clear-signature">Clear</button>
-                </div> -->
                 <div class="submit-container" id="submit">
                     <button type="submit" id="submit-btn">Submit</button>
                 </div>
@@ -425,33 +325,6 @@
             <p id="thank-you-message" style="display: none;">Thank you! Your response has been submitted.</p>
 
         </div>
-
-        <!--    TBD    -->
-        <!-- <div id="details" class="tabcontent" style="display:none;">
-            <p class="faq-intro">We are hosting an intimate wedding to mark our commitment to one another.</p>
-
-            <p class="faq-invite">We invite you to engage with us fully:</p>
-
-            <ul class="faq-list">
-                <li>You will complete a short questionnaire about love to help shape our wedding agenda.</li>
-                <li>You will commit to participating in activities to build connections within our community.</li>
-                <li>You will stretch beyond your comfort zone to foster more meaningful interactions.</li>
-            </ul>
-        </div> -->
-
-        <!-- <div id="faqs" class="tabcontent" style="display:none;">
-            <h2>FAQs</h2>
-
-            <p class="faq-intro">We are hosting an intimate wedding to mark our commitment to one another.</p>
-
-            <p class="faq-invite">We invite you to engage with us fully:</p>
-
-            <ul class="faq-list">
-                <li>You will complete a short questionnaire about love to help shape our wedding agenda.</li>
-                <li>You will commit to participating in activities to build connections within our community.</li>
-                <li>You will stretch beyond your comfort zone to foster more meaningful interactions.</li>
-            </ul>
-        </div> -->
 
         <img src="birdsw.svg" />
         <div class="credit">

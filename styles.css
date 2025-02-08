@@ -288,6 +288,26 @@ button {
   color: white;
 }
 
+#submit-allergy-btn {
+  padding: 10px 20px;
+  background-color: #f5f5f5;
+  color: #2c3e50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  transition: background-color 0.7s ease;
+  width: 100%;
+}
+
+#submit-allergy-btn.selected-yes {
+  background-color: #27ae60;
+  /* Green for Yes */
+  color: white;
+}
+
 .unstyled-link {
   color: inherit; /* Matches the surrounding text color */
   text-decoration: underline; /* Keeps the underline */
@@ -298,6 +318,13 @@ button {
 }
 
 #submit-btn:hover {
+  color: var(--body-text-color);
+  background-color: #27ae60;
+  transition: background-color 0.7s ease;
+
+}
+
+#submit-allergy-btn:hover {
   color: var(--body-text-color);
   background-color: #27ae60;
   transition: background-color 0.7s ease;

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation</title>
+    <title>Anthony & Mahal's Wedding FAQs</title>
     <link rel="stylesheet" href="styles.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
@@ -68,7 +68,7 @@
 
         <div class="faq-invite">
             <h2>Dietary Restrictions</h2>
-            <form>
+            <form id = "allergy-form">
                 <h3>Name:</h3>
                 <textarea id="name-input-faq" class="horizontal-scrollbox" placeholder="Please type your full name"
                     required></textarea>
@@ -88,9 +88,14 @@
                     });
                 </script>
                 <h3>Allergy or Dietary Restrictions:</h3>
-                <textarea id="allergy-input" class="horizontal-scrollbox" placeholder="Please include anything you are allergic or intolerant to"
+                <textarea id="allergy-input" class="horizontal-scrollbox"
                     required></textarea>
+                <div class="submit-container" id="submit">
+                    <button type="submit" id="submit-allergy-btn">Submit</button>
+                </div>
             </form>
+            <p id="thank-you-message-faq" style="display: none;">Thank you! Your response has been submitted.</p>
+
         </div>
 
         <div class="section">
@@ -150,6 +155,8 @@
             "Anthony and Mahal" by George Kikugawa (Age 7), "Tandem Lovebirds" by Anthony Liu (Age 27)
         </p>
     </div>
+    <script src="faq.js"></script>
+
 </body>
 
 </html>

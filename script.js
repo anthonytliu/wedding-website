@@ -125,8 +125,12 @@ function toggleSelection(button, type) {
     }
 }
 
-document.getElementById("saveTheDateForm").addEventListener("submit", function (event) {
-    event.preventDefault();
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Check if the current HTML file is not faq.html
+    if (window.location.pathname.indexOf('faq.html') === -1) {
+        document.getElementById("saveTheDateForm").addEventListener("submit", function (event) {
+            event.preventDefault();
 
     // Show loading spinner
     const spinnerOverlay = document.getElementById('spinnerOverlay');
@@ -141,6 +145,9 @@ document.getElementById("saveTheDateForm").addEventListener("submit", function (
     submitButton.disabled = true; // Disable the submit button to prevent multiple submissions
 
     if (areAllErrorsEmpty()) { // Use parentheses to invoke the function
+        // const deviceInfo = getDeviceInfo();
+        // const ipGeoData = getIPAndGeolocation();
+        // const timestamp = new Date().toISOString();
         const nameInput = document.getElementById('name-input');
         const questionInput = document.getElementById('question-box');
         const questionAnswerBox = document.getElementById('question-answer-box');
@@ -155,6 +162,14 @@ document.getElementById("saveTheDateForm").addEventListener("submit", function (
         const weddingQuestionsBox = document.getElementById('wedding-questions-box');
 
         const templateParams = {
+            // device: deviceInfo,
+            // ip: ipGeoData.ip,
+            // city: ipGeoData.city,
+            // region: ipGeoData.region,
+            // country: ipGeoData.country,
+            // latitude: ipGeoData.latitude,
+            // longitude: ipGeoData.longitude,
+            // timestamp: timestamp,
             from_name: nameInput.value,
             invitation_status: `ACCEPTED`,
             browser_info: browserInfo,
@@ -196,13 +211,7 @@ document.getElementById("saveTheDateForm").addEventListener("submit", function (
         scrollToFirstError(); // Scroll to the first error message
     }
 });
-
-// // Clear signature button
-// document.getElementById("clear-signature").addEventListener("click", function () {
-//     if (signaturePad) {
-//         signaturePad.clear();
-//     }
-// });
+}});
 
 // Collect all error message spans
 const errorMessages = document.querySelectorAll('.error-message');
