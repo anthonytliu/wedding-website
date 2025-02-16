@@ -26,7 +26,67 @@
     <div class="central-body">
         <h1>August 8th, 2025, 3:45pm - 9:00pm</h1>
         <p class="faq-intro">Sunnyside Conservatory + Naked Kitchen + Southern Pacific Brewing</p>
+        <p class="faq-notice"><a href="index.html" style="color: lightcoral;">For our procrastinators: please fill out the questionnaire ASAP</a><br><br> Everyone else: please fill out your dietary restrictions below by April 1!</p>
+        <p class="faq-notice"><a href="#anthony-mahal-answers">Want to see our responses?</a></p>
+
         <div id="save-the-date" class="tabcontent">
+            <div class="faq-invite">
+                <h2 style="margin-bottom: 0;">Dietary Restrictions</h2>
+                <form id = "allergy-form">
+                    <h3 style="font-weight: 100;">Name:</h3>
+                    <textarea id="name-input-faq" class="horizontal-scrollbox" placeholder="Please type your name"
+                        required></textarea>
+                    <span id="name-error-faq" class="error-message" style="display:none;"></span>
+                    <h3 style="font-weight: 100;">Email:</h3>
+                    <textarea id="email-input-faq" class="horizontal-scrollbox" placeholder="Please type your email"
+                    required></textarea>
+                <span id="email-error-faq" class="error-message" style="display:none;"></span>
+                    <script>
+                        const nameInput = document.getElementById('name-input-faq');
+                        const nameError = document.getElementById('name-error-faq');
+    
+                        const emailInput = document.getElementById('email-input-faq');
+                        const emailError = document.getElementById('email-error-faq');
+
+                        nameInput.addEventListener('blur', () => {
+                            const nameValue = nameInput.value.trim();
+                            const nameIsValid = nameValue.split(/\s+/).length > 1;
+                            if (!nameIsValid) {
+                                nameError.textContent = "Please type your full name";
+                            } else {
+                                nameError.textContent = ""; // Clear the error message if there's text
+                            }
+                        });
+
+                        emailInput.addEventListener('blur', () => {
+                            const emailValue = emailInput.value.trim();
+                            const emailIsValid = emailValue.includes('@');
+                            if (!emailIsValid) {
+                                emailError.textContent = "Please type your email";
+                            } else {
+                                emailError.textContent = ""; // Clear the error message if there's text
+                            }
+                        });
+                    </script>
+                    <h3 style="font-weight: 100;">Allergy or Dietary Restrictions:</h3>
+                    <textarea id="allergy-input" class="horizontal-scrollbox" placeholder="Anything you want us to know?" required></textarea>
+                    <div class="submit-container" id="submit">
+                        <button type="submit" id="submit-allergy-btn">Submit</button>
+                    </div>
+                </form>
+                <p id="thank-you-message-faq" style="display: none; font-size: 2rem; color: green;">Thank you! Your response has been submitted.</p>
+    
+            </div>
+        <div class="faq-invite">
+            <h2>Schedule</h2>
+            <ul class="faq-list">
+                <li><strong>3:45 pm</strong> - Please arrive promptly for seating at <strong><a href="https://www.google.com/maps/place/232+Joost+Avenue,+San+Francisco,+CA+94131" target="_blank">Sunnyside Conservatory</a></strong></li>
+                <li><strong>4:00 pm</strong> - Ceremony Begins</li>
+                <li><strong>5:00 pm</strong> - Cocktail Hour at <strong><a href="https://www.google.com/maps/place/945+Valencia+Street,+San+Francisco,+CA+94110" target="_blank">Naked Kitchen</a></strong></li>
+                <li><strong>6:00 pm</strong> - Wine & Dine</li>
+                <li><strong>9:00 pm</strong> - After Party at <strong><a href="https://www.google.com/maps/place/620+Treat+Ave,+San+Francisco,+CA+94110" target="_blank">Southern Pacific Brewing</a></strong></li>
+            </ul>
+        </div>
 
         <div class = "faq-invite">
             <h2 >Directions</h2>
@@ -39,57 +99,15 @@
             </div>  
 
         <div class="faq-invite">
-            <h2>Schedule</h2>
-            <ul class="faq-list">
-                <li><strong>3:45 pm</strong> - Please arrive promptly for seating at <strong><a href="https://www.google.com/maps/place/232+Joost+Avenue,+San+Francisco,+CA+94131" target="_blank">Sunnyside Conservatory</a></strong></li>
-                <li><strong>4:00 pm</strong> - Ceremony Begins</li>
-                <li><strong>5:00 pm</strong> - Cocktail Hour at <strong><a href="https://www.google.com/maps/place/945+Valencia+Street,+San+Francisco,+CA+94110" target="_blank">Naked Kitchen</a></strong></li>
-                <li><strong>6:00 pm</strong> - Wine & Dine</li>
-                <li><strong>9:00 pm</strong> - After Party at <strong><a href="https://www.google.com/maps/place/620+Treat+Ave,+San+Francisco,+CA+94110" target="_blank">Southern Pacific Brewing</a></strong></li>
-            </ul>
-        </div>
-
-        <div class="faq-invite">
             <h2>Dress</h2>
             <p><a href="https://www.pinterest.com/anthonyaliuliu/attire-mood-board/" target="_blank">Here is a mood board for reference.</a></p>
-            <p>Please wear darker shades of blue, green, brown, grey, or black. Florals and patterns welcome. Please no jeans, sandals, or casual wear. SF is chilly in August, so plan for layers.</p>
+            <p>Please wear darker shades of blue, green, brown, grey, or black. Florals and patterns welcome. Please no jeans, sandals, or casual wear (including sneakers). </p>
+            <p>SF is still chilly in August, so plan for layers and check the weather.</p>
         </div>
 
         <div class="faq-invite">
             <h2>Lodging</h2>
-            <p>We recommend staying in the southern or central part of the city. Neighborhoods we suggest are the Mission District, Castro, and Panhandle.</p>
-        </div>
-
-        <div class="faq-invite">
-            <h2>Dietary Restrictions</h2>
-            <form id = "allergy-form">
-                <h3>Name:</h3>
-                <textarea id="name-input-faq" class="horizontal-scrollbox" placeholder="Please type your full name"
-                    required></textarea>
-                <span id="name-error-faq" class="error-message"></span>
-                <script>
-                    const nameInput = document.getElementById('name-input-faq');
-                    const nameError = document.getElementById('name-error-faq');
-
-                    nameInput.addEventListener('blur', () => {
-                        const nameValue = nameInput.value.trim();
-                        const nameIsValid = nameValue.split(/\s+/).length > 1;
-                        if (!nameIsValid) {
-                            nameError.textContent = "Please type your full name";
-                        } else {
-                            nameError.textContent = ""; // Clear the error message if there's text
-                        }
-                    });
-                </script>
-                <h3>Allergy or Dietary Restrictions:</h3>
-                <textarea id="allergy-input" class="horizontal-scrollbox"
-                    required></textarea>
-                <div class="submit-container" id="submit">
-                    <button type="submit" id="submit-allergy-btn">Submit</button>
-                </div>
-            </form>
-            <p id="thank-you-message-faq" style="display: none;">Thank you! Your response has been submitted.</p>
-
+            <p>We recommend staying in the southern or central part of the city close to either venue. Neighborhoods we suggest are the Mission District, Castro, and Panhandle.</p>
         </div>
 
         <div class="section">
@@ -142,6 +160,118 @@
             <p>Your love and presence on our special day is truly the greatest gift we could ask for! We feel deeply grateful to have everything we need. If you feel compelled to give in the traditional sense, <a href="https://www.zola.com/registry/anthonyandmahal" target="_blank">we’ve put together a registry here.</a> Most of all, we’re just excited to celebrate with you! <br><br> For folks that appreciate a charitable donation option, please consider donating to these organizations on our behalf: <a href="https://www.sistersong.net/reproductive-justice" target="_blank">Sister Song</a> or <a href="https://goodkarmabikes.org/donate/" target="_blank">Good Karma Bikes</a></p>
             </p>
         </div>
+        </div>
+    </div>
+    <div style="height: 200px;"></div>
+    <div id="anthony-mahal-answers" class="tabcontent">
+        <div class="faq-invite">
+            <h2>Anthony & Mahal's Responses</h2>
+            <div class="faq-answer">
+                <table>
+                    <tr>
+                        <td style="padding: 10px;"><strong></strong></td>
+                        <td style="padding: 10px;"><strong>Fun Fact 1</strong></td>
+                        <td style="padding: 10px;"><strong>Fun Fact 2</strong></td>
+                        <td style="padding: 10px;"><strong>Fun Fact 3</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><strong>MM</strong></td>
+                        <td style="padding: 10px;">There is a huge mural of me in downtown Medford, Oregon</td>
+                        <td style="padding: 10px;">I skipped the first grade</td>
+                        <td style="padding: 10px;">I own a functional battle axe</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><strong>AL</strong></td>
+                        <td style="padding: 10px;">I designed a pair of bicycle handlebars for track racing that are named after Mahal and are used at world championships</td>
+                        <td style="padding: 10px;">23andMe confirmed that I'm 100% Chinese</td>
+                        <td style="padding: 10px;">I've lost 4 mouth guards to our dog Murphy chewing them up</td>
+                    </tr>
+                </table>
+                    </tr>
+                </table>
+                <h3>Recipe Shared:</h3>
+                <table>
+                    <tr>
+                        <td style="padding: 10px;"><strong>MM:</strong></td>
+                        <td style="padding: 10px;">Anthony would have this (<a href="https://www.maangchi.com/recipe/dwaejigogi-jjigae" target="_blank">https://www.maangchi.com/recipe/dwaejigogi-jjigae</a>) waiting for me each time I drove down to visit him when we first started dating (while we were doing long distance). I really love soup, and this recipe is especially warm and filling; best served with a soft-boiled egg. A close second is Anthony's lentil soup recipe that he sketched out and shared with me (pictured below) before we even met. I bought all of the ingredients for it the same day the I got the card in the mail.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><strong>AL:</strong></td>
+                        <td style="padding: 10px;">热干面 (Hot Dry Noodles) -- this is a staple breakfast item from my dad's hometown in Hubei, China. It uses sesame paste, chili oil, and dried toppings to create an intensely rich and flavorful noodle that's essentially all sauce with zero broth. <a href="https://thewoksoflife.com/hot-dry-noodles-re-gan-mian/" target="_blank">https://thewoksoflife.com/hot-dry-noodles-re-gan-mian/</a></td>
+                    </tr>
+                </table>
+                <h3>First Feeling of Love:</h3>
+                <table>
+                    <tr>
+                        <td style="padding: 10px;"><strong>MM:</strong></td>
+                        <td style="padding: 10px;"><p>The first times I felt especially loved were around the age 3, thanks to my mom and Auntie Elma.</p>
+                            <p>My mom would braid my hair every single morning before preschool; even then I realized that my requests to have PERFECTLY braided hair EVERY morning were pretty high maintenance. I remember thinking something along the lines of "wow she must love me a lot" as I carried my brush and hair ties to her at 7am.</p>
+                            <p>Another early instance of feeling loved left marks on me (physically, a scar on my right thumb, and in my conscience too). It was a late summer evening, and we were picking blackberries at the end of the road. I was very excited at the idea of blackberry treats, and though my mom and Uncle Larry both warned me not to run home with my hands full, I ran, and inevitably tripped and slammed into the ground. I crushed a bowl full of blackberries and somehow tore open my right thumb; the juices mixed with my blood. Mom and Uncle Larry issued a (warranted) "I told you so" while I stomped the rest of the way home screaming.</p>
+                            <p>Auntie Elma sat me on the bathroom counter and cleaned out my thumb, equal parts exasperated and worried. She calmed me by yelling "DEEP BREATHS" to cool my screaming. She bandaged me up so gently and patiently, more kindly than I felt I deserved, and I felt safe and loved.   </p>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><strong>AL:</strong></td>
+                        <td style="padding: 10px;"><p>This isn't the first time exactly, but it is the most vivid moment of my childhood. When I was 7, I became incredibly sick with a condition known as IPT where my white-blood cells were being destroyed by my spleen (autoimmune disorder). On Thanksgiving Day, my father drove me to the hospital in heavy snow (as we lived in Connecticut at the time) to the hospital to receive treatment. It was an intensive process with many weeks of blood transfusions, steroid boosters, and hospital food. Mid-way through my stay, my mother brought me the fifth Harry Potter book as it had just been released. During this time I couldn't do much except read and get well, but I have always cherished how loved I felt by both my parents during that difficult period of my life.</p>
+                        </td>
+                    </tr>
+                </table>
+            
+                <h3>What They Love Most Now:</h3>
+                <table>
+                    <tr>
+                        <td style="padding: 10px;"><strong>MM:</strong></td>
+                        <td style="padding: 10px;">
+                            <p>I love Anthony, my fresnel lens, directing my focus into the light, safety, and joy of our lives. He reminds me of where we're headed while illuminating what we have now.</p>
+                            <p>I love how we still ask one another questions and maintain a commitment to curiosity of one another. I love how he finds a way to incorporate play and silliness into our lives, even with big life changes looming. I love how he Gets Shit Done: I love that I can trust him to follow through with projects or goals with integrity, initiative, and attention. I love how he is so generous and patient and gentle with me. I love how actively he creates space for me, how he takes me seriously and unseriously when I need it. I love how earnestly he reads my poetry even when he doesn't understand it.</p>
+                            <p>I love how readily Anthony embraces the co-creation of our life together—one so wonderful, so full of joy, that it often surpasses anything I could have imagined dreaming for myself.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><strong>AL:</strong></td>
+                        <td style="padding: 10px;">
+                            <p>I love Mahal the most right now. She's everything that I have ever wanted from a life partner. Her wit and charm never fail to brighten my day and always manages to fix my sour mood. I'm constantly in awe of how she's able to approach things in a methodical and meticulous way, especially when it comes to the people in her life that she loves. She is unabashed about expressing concern and interest for the most important people in her life.</p>
+                            <p>I love how Mahal holds me accountable and always believes in the best version of myself. I'm not perfect, and she accepts me for my flaws and my virtues. I think everyone who has had the privilege of having Mahal in their life can speak to how amazing she is.</p>
+                        </td>
+                    </tr>
+                </table></td>
+
+                <h3>Favorite Love Songs:</h3>
+                <table>
+                    <tr>
+                        <td style="padding: 10px;"><strong>MM:</strong></td>
+                        <td style="padding: 10px;">
+                            <ul>
+                                <li>I, Carrion (Icarian) by Hozier</li>
+                                <li>Coming Home by Leon Bridges</li>
+                                <li>A Sunday Kind of Love by Etta James</li>
+                                <li>minty kisses by Jade Alice</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><strong>AL:</strong></td>
+                        <td style="padding: 10px;">
+                            <ul>
+                                <li>'Dawn' - Dario Marianelli</li>
+                                <li>'Waltz No. 2' - Dmitri Shostakovich</li>
+                                <li>'Agape' - Nicholas Britell</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+
+                <h3>Piece of Wisdom:</h3>
+                <table>
+                    <tr>
+                        <td style="padding: 10px;"><strong>MM:</strong></td>
+                        <td style="padding: 10px;">Do good and take care. Life is long.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><strong>AL:</strong></td>
+                        <td style="padding: 10px;">Do or do not. There is no try. - Master Yoda</td>
+                    </tr>
+                </table>
         </div>
     </div>
     <img src="birdsw.svg" />

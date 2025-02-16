@@ -415,6 +415,13 @@ input::placeholder {
   font-style: italic;
 }
 
+.faq-notice {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
 .faq-invite {
   text-align: start;
   margin-bottom: 20px;
