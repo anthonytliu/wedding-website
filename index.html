@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anthony & Mahal's Wedding</title>
+    <title>Anthony & Mahal's Wedding FAQs</title>
     <link rel="stylesheet" href="styles.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function () {
             emailjs.init({
@@ -15,322 +14,227 @@
             });
         })();
     </script>
+    <style>
+        a {
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
     <img class="need-heading" src="manthanol.png" />
-
     <div class="central-body">
-        <h1>Anthony & Mahal's Wedding</h1>
-        <a href="faq.html" class="FAQ-button">Frequently Asked Questions</a>
+        <h1>August 8th, 2025, 3:45pm - 9:00pm</h1>
+        <p class="faq-intro">Sunnyside Conservatory + Naked Kitchen + Southern Pacific Brewing</p>
+        <p class="faq-notice"><a href="#anthony-mahal-answers">Want to see our responses to the questionnaire?</a></p>
+
         <div id="save-the-date" class="tabcontent">
-
-            <p class="faq-intro">We're getting married!</p>
-            <p class="faq-invite">We’re hosting an intimate and interactive wedding gathering. We invite you to engage
-                with us fully.</p>
-            <p class="faq-invite">Here's an overview of your journey to our wedding day:</p>
-
+    
+        <div class="faq-invite">
+            <h2>Schedule</h2>
             <ul class="faq-list">
-                <li>Winter 2025: Receive the save-the-date: You’ve received the save-the-date
-                    because we are inviting our most favorite family and friends to our gathering.</li>
-                <li>Spring 2025: Receive the formal invitation: In a couple of months, you’ll receive a
-                    formal invitation in the mail.</li>
-                <li>Summer 2025: Join our wedding day on August 8, 2025.
-                </li>
+                <li><strong>3:45 pm</strong> - Please arrive promptly for seating at <strong><a href="https://www.google.com/maps/place/232+Joost+Avenue,+San+Francisco,+CA+94131" target="_blank">Sunnyside Conservatory</a></strong></li>
+                <li><strong>4:00 pm</strong> - Ceremony Begins</li>
+                <li><strong>5:30 pm</strong> - Cocktail Hour at <strong><a href="https://www.google.com/maps/place/945+Valencia+Street,+San+Francisco,+CA+94110" target="_blank">Naked Kitchen</a></strong></li>
+                <li><strong>6:30 pm</strong> - Wine & Dine</li>
+                <li><strong>9:00 pm</strong> - After Party at <strong><a href="https://www.google.com/maps/place/620+Treat+Ave,+San+Francisco,+CA+94110" target="_blank">Southern Pacific Brewing</a></strong></li>
             </ul>
- 
-            <p class="faq-invite">Please spend at least 15 minutes thoughtfully filling out the form below. Your responses will
-                inform our wedding agenda, including: icebreakers, conversation prompts, and assigned
-                seating. Please call or text us if you have any questions. <br><br>
-               
-            </p>
-
-            <form id="saveTheDateForm">
-                <p>What is your full name?</p>
-                <textarea id="name-input" class="horizontal-scrollbox" placeholder="Please type your full name"
-                    required></textarea>
-                <span id="name-error" class="error-message"></span>
-                <script>
-                    const nameInput = document.getElementById('name-input');
-                    const nameError = document.getElementById('name-error');
-
-                    nameInput.addEventListener('blur', () => {
-                        const nameValue = nameInput.value.trim();
-                        const nameIsValid = nameValue.split(/\s+/).length > 1;
-                        if (!nameIsValid) {
-                            nameError.textContent = "Please type your full name";
-                        } else {
-                            nameError.textContent = ""; // Clear the error message if there's text
-                        }
-                    });
-                </script>
-                <p>1. We spent our first date talking through <a href="https://www.werenotreallystrangers.com/"
-                        target="_blank" rel="noopener noreferrer" class="unstyled-link">We're Not Really Strangers</a>
-                    prompts, a gift from Andi Casad (Mahal’s best friend). We included one of the prompts in each of
-                    your save-the-date letters. Which question did you receive? </p>
-                <textarea id="question-box" class="medium-scrollable-textbox" placeholder="Please enter your question"
-                    required></textarea>
-                <span id="question-box-error" class="error-message"></span>
-
-                <script>
-                    const questionInput = document.getElementById('question-box');
-                    const questionError = document.getElementById('question-box-error');
-
-                    questionInput.addEventListener('blur', () => {
-                        const questionValue = questionInput.value.trim().length; // Remove the parentheses
-                        if (questionValue === 0) { // Check if the input is empty
-                            questionError.textContent = "Please type your question above.";
-                        } else {
-                            questionError.textContent = ""; // Clear error message if valid
-                        }
-                    });
-                </script>
-
-                <p>What is your response to the prompt? If the question asks for one word, please answer with many
-                    words. If the question refers to an “us”, direct the question at anyone in your life, but specify
-                    who you chose in your response. <strong>Please explain your answer.</strong></p>
-                <textarea id="question-answer-box" class="scrollable-textbox" placeholder="Please type your answer here"
-                    required></textarea>
-                <div id="word-count" class="word-count">0/50</div>
-                <span id="question-answer-box-error" class="error-message"></span>
-                <script>
-                    const questionAnswerBox = document.getElementById('question-answer-box');
-                    const wordCountDisplay = document.getElementById('word-count');
-                    const questionAnswerBoxError = document.getElementById('question-answer-box-error');
-
-                    // Function to count words
-                    function countWords(text) {
-                        return text
-                            .replace(/\s+/g, ' ') // Replace multiple spaces with one
-                            .trim() // Trim leading and trailing whitespace
-                            .split(' ') // Split by spaces
-                            .filter(word => word.length > 1) // Ignore single-character "words"
-                            .length;
-                    }
-
-                    // Function to update word count
-                    function updateWordCount() {
-                        const wordCount = countWords(questionAnswerBox.value);
-                        wordCountDisplay.textContent = `${wordCount}/50`; // Update word count display
-                    }
-
-                    // Event listener for real-time word count
-                    questionAnswerBox.addEventListener('input', updateWordCount);
-
-                    // Validate only on blur (when user clicks away)
-                    questionAnswerBox.addEventListener('blur', () => {
-                        if (countWords(questionAnswerBox.value) < 50) {
-                            questionAnswerBoxError.textContent = `Your text must be at least 50 words.`;
-                        } else {
-                            questionAnswerBoxError.textContent = ''; // Clear error message
-                        }
-                    });
-
-                    // Hide the error message when the text box is focused (typing starts)
-                    questionAnswerBox.addEventListener('focus', () => {
-                        questionAnswerBoxError.textContent = ''; // Clear error message when focusing on the text box
-                    });
-                </script>
-
-
-                <p>2. We think the people in our lives are really interesting. We love talking about our loved ones. Please
-                    share three fun family-friendly facts about yourself:</p>
-
-                <div class="fact-container">
-                    <textarea id="fact-1" class="horizontal-scrollbox" placeholder="Fun Fact 1" required></textarea>
-                    <span id="fact-1-error" class="error-message"></span>
-                </div>
-
-                <div class="fact-container">
-                    <textarea id="fact-2" class="horizontal-scrollbox" placeholder="Fun Fact 2" required></textarea>
-                    <span id="fact-2-error" class="error-message"></span>
-                </div>
-
-                <div class="fact-container">
-                    <textarea id="fact-3" class="horizontal-scrollbox" placeholder="Fun Fact 3" required></textarea>
-                    <span id="fact-3-error" class="error-message"></span>
-                </div>
-
-                <p>3. Please share a recipe to a dish that you associate with love (links are ok!):</p>
-                <textarea id="recipe-box" class="medium-scrollable-textbox"
-                    placeholder="My aunt's rich, savory beef casarecce..." required></textarea>
-                <span id="recipe-box-error" class="error-message"></span>
-
-                <script>
-                    const recipeInput = document.getElementById('recipe-box');
-                    const recipeError = document.getElementById('recipe-box-error');
-
-                    recipeInput.addEventListener('blur', () => {
-                        const recipeValue = recipeInput.value.trim().length; // Get the length of the trimmed input
-                        if (recipeValue === 0) { // Check if the input is empty
-                            recipeError.textContent = "Please share your recipe or a URL to the recipe"; // Display error message
-                        } else {
-                            recipeError.textContent = ""; // Clear error message if valid
-                        }
-                    });
-                </script>
-
-                <p id="love-feeling-box-title">4. When was the first time you felt especially loved?</p>
-                <textarea id="love-feeling-box" class="scrollable-textbox" placeholder="Please share your story"
-                    required></textarea>
-                <span id="love-feeling-word-count" class="word-count">0/50</span>
-                <span id="love-feeling-error" class="error-message"></span>
-
-
-                <script>
-                    const loveFeelingTextbox = document.getElementById('love-feeling-box');
-                    const loveFeelingWordCount = document.getElementById('love-feeling-word-count');
-                    const loveFeelingError = document.getElementById('love-feeling-error');
-
-                    // Function to count words
-                    function countWords(text) {
-                        return text
-                            .replace(/\s+/g, ' ') // Replace multiple spaces with one
-                            .trim() // Trim leading and trailing whitespace
-                            .split(' ') // Split by spaces
-                            .filter(word => word.length > 1) // Ignore single-character "words"
-                            .length;
-                    }
-
-                    // Function to update word count
-                    function updateWordCount() {
-                        const wordCount = countWords(loveFeelingTextbox.value);
-                        loveFeelingWordCount.textContent = `${wordCount}/50`; // Update word count display
-                    }
-
-                    // Event listener for real-time word count
-                    loveFeelingTextbox.addEventListener('input', updateWordCount);
-
-                    // Validate only on blur (when user clicks away)
-                    loveFeelingTextbox.addEventListener('blur', () => {
-                        if (countWords(loveFeelingTextbox.value) < 50) {
-                            loveFeelingError.textContent = "Your text must be at least 50 words."; // Show error message
-                        } else {
-                            loveFeelingError.textContent = ''; // Clear error message
-                        }
-                    });
-
-                    // Hide the error message when the text box is focused (typing starts)
-                    loveFeelingTextbox.addEventListener('focus', () => {
-                        loveFeelingError.textContent = ''; // Clear error message when focusing on the text box
-                    });
-                </script>
-
-                <p id="love-most-box-title">5. What do you love the most right now?</p>
-                <textarea id="love-most-box" class="scrollable-textbox" placeholder="Please share your thoughts"
-                    required></textarea>
-                <span id="love-most-word-count" class="word-count">0/50</span>
-                <span id="love-most-error" class="error-message"></span>
-                <script>
-                    const loveMostTextbox = document.getElementById('love-most-box');
-                    const loveMostWordCount = document.getElementById('love-most-word-count');
-                    const loveMostError = document.getElementById('love-most-error');
-
-                    // Function to count words
-                    function countWords(text) {
-                        return text
-                            .replace(/\s+/g, ' ') // Replace multiple spaces with one
-                            .trim() // Trim leading and trailing whitespace
-                            .split(' ') // Split by spaces
-                            .filter(word => word.length > 1) // Ignore single-character "words"
-                            .length;
-                    }
-
-                    // Function to update word count
-                    function updateWordCount() {
-                        const wordCount = countWords(loveMostTextbox.value);
-                        loveMostWordCount.textContent = `${wordCount}/50`; // Update word count display
-                    }
-
-                    // Event listener for real-time word count
-                    loveMostTextbox.addEventListener('input', updateWordCount);
-
-                    // Validate only on blur (when user clicks away)
-                    loveMostTextbox.addEventListener('blur', () => {
-                        if (countWords(loveMostTextbox.value) < 50) {
-                            loveMostError.textContent = "Your text must be at least 50 words."; // Show error message
-                        } else {
-                            loveMostError.textContent = ''; // Clear error message
-                        }
-                    });
-
-                    // Hide the error message when the text box is focused (typing starts)
-                    loveMostTextbox.addEventListener('focus', () => {
-                        loveMostError.textContent = ''; // Clear error message when focusing on the text box
-                    });
-                </script>
-
-                <p>6. What are your favorite love songs? Please include artists.</p>
-                <textarea id="song-movie-box" class="medium-scrollable-textbox" placeholder="'At Last' by Etta James"
-                    required></textarea>
-                <span id="song-movie-box-error" class="error-message"></span>
-
-                <script>
-                    const songMovieInput = document.getElementById('song-movie-box');
-                    const songMovieError = document.getElementById('song-movie-box-error');
-
-                    songMovieInput.addEventListener('blur', () => {
-                        const questionValue = songMovieInput.value.trim().length; // Remove the parentheses
-                        if (questionValue === 0) { // Check if the input is empty
-                            songMovieError.textContent = "Please type your response above.";
-                        } else {
-                            songMovieError.textContent = ""; // Clear error message if valid
-                        }
-                    });
-                </script>
-
-
-                <p>7. What is a piece of wisdom that has carried you through life?</p>
-                <textarea id="wisdom-box" class="medium-scrollable-textbox"
-                    placeholder="The path to wisdom is paved with humility." required></textarea>
-                <span id="wisdom-box-error" class="error-message"></span>
-
-                <script>
-                    const wisdomInput = document.getElementById('wisdom-box');
-                    const wisdomError = document.getElementById('wisdom-box-error');
-
-                    wisdomInput.addEventListener('blur', () => {
-                        const questionValue = wisdomInput.value.trim().length; // Remove the parentheses
-                        if (questionValue === 0) { // Check if the input is empty
-                            wisdomError.textContent = "Please type your response above.";
-                        } else {
-                            wisdomError.textContent = ""; // Clear error message if valid
-                        }
-                    });
-                </script>
-
-                <p>8. Do you have any questions for us about our wedding?</p>
-                <textarea id="wedding-questions-box" class="medium-scrollable-textbox"
-                    placeholder="There are no dumb questions!" required></textarea>
-                <span id="wedding-questions-box-error" class="error-message"></span>
-
-                <p id="understand-statement">By hitting submit, you are confirming you’ve thoughtfully completed this questionnaire to the best of your abilities.</p>
-                <div class="submit-container" id="submit">
-                    <button type="submit" id="submit-btn">Submit</button>
-                </div>
-
-
-            </form>
-
-            <div class="spinner-overlay" id="spinnerOverlay">
-                <div id="loading-spinner" class="spinner"></div>
-            </div>
-            <!-- Loading spinner (initially hidden) -->
-
-            <!-- Thank You message (initially hidden) -->
-            <p id="thank-you-message" style="display: none;">Thank you! Your response has been submitted.</p>
-
         </div>
 
-        <img src="birdsw.svg" />
-        <div class="credit">
-            <p class="credit-text">
-                "Anthony and Mahal" by George Kikugawa (Age 7), "Tandem Lovebirds" by Anthony Liu (Age 27)
+        <div class = "faq-invite">
+            <h2 >Directions</h2>
+            <!-- <p class="faq-invite">Please use ride-sharing if possible as street parking is very limited. There will be several steps descending down to the conservatory.</p> -->
+            <ul class="faq-list">
+                <li><strong>Sunnyside Conservatory:</strong> <a href="https://maps.app.goo.gl/uPCBMoiCdZKPK6pR7" target="_blank">236 Monterey Blvd, San Francisco, CA 94131</a></li>
+                <li><strong>Naked Kitchen:</strong> <a href="https://www.google.com/maps/place/945+Valencia+Street,+San+Francisco,+CA+94110" target="_blank">945 Valencia Street, San Francisco, CA 94110</a></li>
+                <li><strong>Southern Pacific Brewing:</strong> <a href="https://www.google.com/maps/place/620+Treat+Ave,+San+Francisco,+CA+94110" target="_blank">620 Treat Ave, San Francisco, CA 94110</a></li>
+            </ul>
+            </div>  
+
+        <div class="faq-invite">
+            <h2>Dress</h2>
+            <p><a href="https://www.pinterest.com/anthonyaliuliu/attire-mood-board/" target="_blank">Here is a mood board for reference.</a></p>
+            <p>Please wear darker shades of blue, green, brown, grey, or black. Florals and patterns welcome. Please no jeans, sandals, or casual wear (including sneakers). </p>
+            <p>SF is still chilly in August, so plan for layers and check the weather.</p>
+        </div>
+
+        <div class="faq-invite">
+            <h2>Lodging</h2>
+            <p>We recommend staying in the southern or central part of the city close to either venue. Neighborhoods we suggest are the Mission District, Castro, and Panhandle.</p>
+        </div>
+
+        <div class="section">
+            <h2>FAQs</h2>
+            <h3><em>What should I wear?</em></h3>
+            <p>Please see “Dress” above. Feel free to send us any questions or outfit ideas!</p>
+            <br>
+
+            <h3><em>Can I bring a plus one?</em></h3>
+            <p>Due to the intimate and interactive nature of our wedding, we’ve selected venues that have limited capacity. Every guest who is invited will be explicitly listed on the invitation.</p>
+            <br>
+
+            <h3><em>Can I bring my children?</em></h3>
+            <p>Similar to our answer to plus ones, only those who have invitations can attend.</p>
+            <br>
+
+            <h3><em>Will the venue be outdoors or indoors?</em></h3>
+            <p>The ceremony will be indoors. The cocktail hour will be on a backyard patio. The dinner will be indoors. The after party will be at a brewery with both indoor and outdoor seating. Bring layers!</p>
+            <br>
+
+            <h3><em>Accessibility</em></h3>
+            <p>The Sunnyside Conservatory address we’ve linked directs to a street address with a few not-too-steep stairs along with handrails. If you are more comfortable using a ramp, we highly recommend routing to the Sunnyside Conservatory main entrance at 236 Monterey Blvd, San Francisco, CA 94131.</p>
+            <br>
+
+            <h3><em>Will there be parking?</em></h3>
+            <p>No, unfortunately, none of the venues have accessible parking. If you are driving to the venues, we recommend budgeting a generous amount of time to find parking. If you opt for public transport, please account for potential delays. It’s very important to us that folks are on time to the ceremony (3:45pm sharp!) in particular.</p>
+            <br>
+
+            <h3><em>What kind of food will be served?</em></h3>
+            <p>We will be serving Filipino and Chinese-influenced New American cuisine with a focus on local, farm-to-table food. Please let us know of any dietary restrictions you may have so that you can enjoy the meal to its fullest.</p>
+            <br>
+
+            <h3><em>Will there be alcohol?</em></h3>
+            <p>Yes, we will have a small selection of alcoholic and non-alcoholic beverages during the cocktail hour so that everyone can participate. If you elect to bring your own alcoholic beverage, you will be firmly asked to leave our gathering.</p>
+            <br>
+
+            <h3><em>Do I have to attend the after party?</em></h3>
+            <p>No – only warm invitation, no obligation.</p>
+            <br>
+
+            <h3><em>What do you mean by “intimate and interactive” gathering?</em></h3>
+            <p>We really want our community to learn more about one another and celebrate love. We appreciate the time, care, and intent you have all brought to the save-the-date questionnaire responses. We will use components of the questionnaire to create icebreaker-style materials for our ceremony, cocktail hour, and dinner. Please reach out if you are curious about specific ways we are planning to do this!</p>
+            <br>
+
+            <h3><em>Can I take pictures during the wedding?</em></h3>
+            <p>We really want everyone to be present in the moment. We’ll have a skilled and creative photographer (Anna Gillespie) and videographer (Emma Burke) documenting everything, so please keep phones and cameras away during the ceremony.</p>
+            <br>
+
+            <h3><em>What about gifts?</em></h3>
+            <p>Your love and presence on our special day is truly the greatest gift we could ask for! We feel deeply grateful to have everything we need. If you feel compelled to give in the traditional sense, <a href="https://www.zola.com/registry/anthonyandmahal" target="_blank">we’ve put together a registry here.</a> Most of all, we’re just excited to celebrate with you! <br><br> For folks that appreciate a charitable donation option, please consider donating to these organizations on our behalf: <a href="https://www.sistersong.net/reproductive-justice" target="_blank">Sister Song</a> or <a href="https://goodkarmabikes.org/donate/" target="_blank">Good Karma Bikes</a></p>
             </p>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-        <script src="script.js"></script>
+        </div>
     </div>
+    <div style="height: 200px;"></div>
+    <div id="anthony-mahal-answers" class="tabcontent">
+        <div class="faq-invite">
+            <h2>Anthony & Mahal's Responses</h2>
+            <div class="faq-answer">
+                <table>
+                    <tr>
+                        <td style="padding: 10px;"><strong></strong></td>
+                        <td style="padding: 10px;"><strong>Fun Fact 1</strong></td>
+                        <td style="padding: 10px;"><strong>Fun Fact 2</strong></td>
+                        <td style="padding: 10px;"><strong>Fun Fact 3</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><strong>MM</strong></td>
+                        <td style="padding: 10px;">There is a huge mural of me in downtown Medford, Oregon</td>
+                        <td style="padding: 10px;">I skipped the first grade</td>
+                        <td style="padding: 10px;">I own a functional battle axe</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><strong>AL</strong></td>
+                        <td style="padding: 10px;">I designed a pair of bicycle handlebars for track racing that are named after Mahal and are used at world championships</td>
+                        <td style="padding: 10px;">23andMe confirmed that I'm 100% Chinese</td>
+                        <td style="padding: 10px;">I've lost 4 mouth guards to our dog Murphy chewing them up</td>
+                    </tr>
+                </table>
+                    </tr>
+                </table>
+                <h3>Recipe Shared:</h3>
+                <table>
+                    <tr>
+                        <td style="padding: 10px;"><strong>MM:</strong></td>
+                        <td style="padding: 10px;">Anthony would have this (<a href="https://www.maangchi.com/recipe/dwaejigogi-jjigae" target="_blank">https://www.maangchi.com/recipe/dwaejigogi-jjigae</a>) waiting for me each time I drove down to visit him when we first started dating (while we were doing long distance). I really love soup, and this recipe is especially warm and filling; best served with a soft-boiled egg. A close second is Anthony's lentil soup recipe that he sketched out and shared with me (pictured below) before we even met. I bought all of the ingredients for it the same day the I got the card in the mail.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><strong>AL:</strong></td>
+                        <td style="padding: 10px;">热干面 (Hot Dry Noodles) -- this is a staple breakfast item from my dad's hometown in Hubei, China. It uses sesame paste, chili oil, and dried toppings to create an intensely rich and flavorful noodle that's essentially all sauce with zero broth. <a href="https://thewoksoflife.com/hot-dry-noodles-re-gan-mian/" target="_blank">https://thewoksoflife.com/hot-dry-noodles-re-gan-mian/</a></td>
+                    </tr>
+                </table>
+                <h3>First Feeling of Love:</h3>
+                <table>
+                    <tr>
+                        <td style="padding: 10px;"><strong>MM:</strong></td>
+                        <td style="padding: 10px;"><p>The first times I felt especially loved were around the age 3, thanks to my mom and Auntie Elma.</p>
+                            <p>My mom would braid my hair every single morning before preschool; even then I realized that my requests to have PERFECTLY braided hair EVERY morning were pretty high maintenance. I remember thinking something along the lines of "wow she must love me a lot" as I carried my brush and hair ties to her at 7am.</p>
+                            <p>Another early instance of feeling loved left marks on me (physically, a scar on my right thumb, and in my conscience too). It was a late summer evening, and we were picking blackberries at the end of the road. I was very excited at the idea of blackberry treats, and though my mom and Uncle Larry both warned me not to run home with my hands full, I ran, and inevitably tripped and slammed into the ground. I crushed a bowl full of blackberries and somehow tore open my right thumb; the juices mixed with my blood. Mom and Uncle Larry issued a (warranted) "I told you so" while I stomped the rest of the way home screaming.</p>
+                            <p>Auntie Elma sat me on the bathroom counter and cleaned out my thumb, equal parts exasperated and worried. She calmed me by yelling "DEEP BREATHS" to cool my screaming. She bandaged me up so gently and patiently, more kindly than I felt I deserved, and I felt safe and loved.   </p>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><strong>AL:</strong></td>
+                        <td style="padding: 10px;"><p>This isn't the first time exactly, but it is the most vivid moment of my childhood. When I was 7, I became incredibly sick with a condition known as IPT where my white-blood cells were being destroyed by my spleen (autoimmune disorder). On Thanksgiving Day, my father drove me to the hospital in heavy snow (as we lived in Connecticut at the time) to the hospital to receive treatment. It was an intensive process with many weeks of blood transfusions, steroid boosters, and hospital food. Mid-way through my stay, my mother brought me the fifth Harry Potter book as it had just been released. During this time I couldn't do much except read and get well, but I have always cherished how loved I felt by both my parents during that difficult period of my life.</p>
+                        </td>
+                    </tr>
+                </table>
+            
+                <h3>What They Love Most Now:</h3>
+                <table>
+                    <tr>
+                        <td style="padding: 10px;"><strong>MM:</strong></td>
+                        <td style="padding: 10px;">
+                            <p>I love Anthony, my fresnel lens, directing my focus into the light, safety, and joy of our lives. He reminds me of where we're headed while illuminating what we have now.</p>
+                            <p>I love how we still ask one another questions and maintain a commitment to curiosity of one another. I love how he finds a way to incorporate play and silliness into our lives, even with big life changes looming. I love how he Gets Shit Done: I love that I can trust him to follow through with projects or goals with integrity, initiative, and attention. I love how he is so generous and patient and gentle with me. I love how actively he creates space for me, how he takes me seriously and unseriously when I need it. I love how earnestly he reads my poetry even when he doesn't understand it.</p>
+                            <p>I love how readily Anthony embraces the co-creation of our life together—one so wonderful, so full of joy, that it often surpasses anything I could have imagined dreaming for myself.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><strong>AL:</strong></td>
+                        <td style="padding: 10px;">
+                            <p>I love Mahal the most right now. She's everything that I have ever wanted from a life partner. Her wit and charm never fail to brighten my day and always manages to fix my sour mood. I'm constantly in awe of how she's able to approach things in a methodical and meticulous way, especially when it comes to the people in her life that she loves. She is unabashed about expressing concern and interest for the most important people in her life.</p>
+                            <p>I love how Mahal holds me accountable and always believes in the best version of myself. I'm not perfect, and she accepts me for my flaws and my virtues. I think everyone who has had the privilege of having Mahal in their life can speak to how amazing she is.</p>
+                        </td>
+                    </tr>
+                </table></td>
+
+                <h3>Favorite Love Songs:</h3>
+                <table>
+                    <tr>
+                        <td style="padding: 10px;"><strong>MM:</strong></td>
+                        <td style="padding: 10px;">
+                            <ul>
+                                <li>I, Carrion (Icarian) by Hozier</li>
+                                <li>Coming Home by Leon Bridges</li>
+                                <li>A Sunday Kind of Love by Etta James</li>
+                                <li>minty kisses by Jade Alice</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><strong>AL:</strong></td>
+                        <td style="padding: 10px;">
+                            <ul>
+                                <li>'Dawn' - Dario Marianelli</li>
+                                <li>'Waltz No. 2' - Dmitri Shostakovich</li>
+                                <li>'Agape' - Nicholas Britell</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+
+                <h3>Piece of Wisdom:</h3>
+                <table>
+                    <tr>
+                        <td style="padding: 10px;"><strong>MM:</strong></td>
+                        <td style="padding: 10px;">Do good and take care. Life is long.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><strong>AL:</strong></td>
+                        <td style="padding: 10px;">Do or do not. There is no try. - Master Yoda</td>
+                    </tr>
+                </table>
+        </div>
+    </div>
+    <img src="birdsw.svg" />
+    <div class="credit">
+        <p class="credit-text">
+            "Anthony and Mahal" by George Kikugawa (Age 7), "Tandem Lovebirds" by Anthony Liu (Age 27)
+        </p>
+    </div>
+    <script src="faq.js"></script>
+
 </body>
 
 </html>
